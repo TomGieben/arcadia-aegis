@@ -1,5 +1,5 @@
 module arcadia.aegis {
     requires hanyaeger;
 
-    exports org.example;
+    exports org.arcadia.aegis;
 }

@@ -1,4 +1,4 @@
-package org.example;
+package org.arcadia.aegis;
 
 import com.github.hanyaeger.api.YaegerGame;
 
