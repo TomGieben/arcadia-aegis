@@ -1,4 +1,5 @@
 package org.arcadia.aegis.inventory;
+import java.util.ArrayList;
 
 public class Inventory {
     private ArrayList<InventoryItem> items;
