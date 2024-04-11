@@ -29,7 +29,7 @@ public class Player implements Collider {
     public Player(String name, String avatarPath) {
         this.name = name;
         this.avatarPath = avatarPath;
-        this.wallet = new Wallet();
+        this.wallet = new Wallet(0);
         this.inventory = new Inventory();
     }
 
