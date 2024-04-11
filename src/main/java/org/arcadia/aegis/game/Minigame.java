@@ -1,6 +1,8 @@
 package org.arcadia.aegis.game;
 
-public class Minigame extends SlotMachine {
+import java.util.ArrayList;
+
+public class Minigame  {
     private String name;
     private String slug;
     private float price;
