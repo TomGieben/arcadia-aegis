@@ -25,6 +25,7 @@ public class Bar implements Collided {
         this.imagePath = imagePath;
         this.locationX = x;
         this.locationY = y;
+        this.inventory = new Inventory();
     }
 
     /*

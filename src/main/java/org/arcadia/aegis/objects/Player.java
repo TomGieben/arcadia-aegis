@@ -27,6 +27,8 @@ public class Player implements Collider {
     public Player(String name, String avatarPath) {
         this.name = name;
         this.avatarPath = avatarPath;
+        this.wallet = new Wallet();
+        this.inventory = new Inventory();
     }
 
     /*
