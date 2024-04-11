@@ -20,6 +20,7 @@ public class Bar implements Collided {
     * @param imagePath The path to the image of the bar
     * @param x The x-coordinate of the bar
     * @param y The y-coordinate of the bar
+     * @param inventory The inventory of the bar
     */
     public Bar(String imagePath, int x, int y) {
         this.imagePath = imagePath;

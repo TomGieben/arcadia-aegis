@@ -23,6 +23,8 @@ public class Player implements Collider {
     *
     * @param name The name of the player
     * @param avatarPath The path to the avatar of the player
+    * @param wallet The wallet of the player
+    * @param inventory The inventory of the player
     */
     public Player(String name, String avatarPath) {
         this.name = name;
