@@ -8,6 +8,7 @@ import com.github.hanyaeger.api.scenes.SceneBorder;
 import com.github.hanyaeger.api.userinput.KeyListener;
 import javafx.scene.Node;
 import javafx.scene.input.KeyCode;
+import org.arcadia.aegis.entities.text.MoneyText;
 import org.arcadia.aegis.enums.InfluenceType;
 import org.arcadia.aegis.game.Wallet;
 import org.arcadia.aegis.inventory.Inventory;
@@ -19,10 +20,11 @@ public class Player extends DynamicSpriteEntity implements Collider, KeyListener
 
     private Wallet wallet;
     private Inventory inventory;
-    private int locationX;
-    private int locationY;
     private float influence;
 
+    private String playerName;
+
+    private MoneyText moneyText;
     /*
     * Constructor
     *
@@ -31,8 +33,12 @@ public class Player extends DynamicSpriteEntity implements Collider, KeyListener
     * @param wallet The wallet of the player
     * @param inventory The inventory of the player
     */
-    public Player(Coordinate2D location) {
-        super("sprites/idle.png", location, new Size(20,40), 1, 2);
+    public Player(Coordinate2D location, MoneyText moneyText, String playerName) {
+        super("sprites/player.png", location, new Size(50, 100));
+        this.moneyText = moneyText;
+        moneyText.setMoneyText(0);
+
+        this.playerName = playerName;
         this.wallet = new Wallet(0);
         this.inventory = new Inventory();
     }
@@ -45,86 +51,45 @@ public class Player extends DynamicSpriteEntity implements Collider, KeyListener
     * @param wallet The wallet of the player
     * @param inventory The inventory of the player
     */
-    public Player(Coordinate2D location, Wallet wallet, Inventory inventory) {
-        super("sprites/idle.png", location, new Size(20,40), 1, 2);
+    public Player(Coordinate2D location, MoneyText moneyText, String playerName, Wallet wallet, Inventory inventory) {
+        super("sprites/idle.png", location, new Size(50,100));
+        this.moneyText = moneyText;
+        moneyText.setMoneyText(wallet.getAmount());
+
+        this.playerName = playerName;
         this.wallet = wallet;
         this.inventory = inventory;
     }
 
     /*
-    * Set the location of the player
-    *
-    * @param x The x-coordinate of the player
-    * @param y The y-coordinate of the player
-    * @return void
-    */
-    public void setLocation(int x, int y) {
-        this.setLocationX(x);
-        this.setLocationY(y);
-    }
+     * Get the inventory of the player
+     *
+     * @return Inventory The inventory of the player
+     */
 
-    /*
-    * Set the x-coordinate of the player
-    *
-    * @param locationX The x-coordinate of the player
-    * @return void
-    */
-    public void setLocationX(int locationX) {
-        this.locationX = locationX;
-    }
-
-    /*
-    * Set the y-coordinate of the player
-    *
-    * @param locationY The y-coordinate of the player
-    * @return void
-    */
-    public void setLocationY(int locationY) {
-        this.locationY = locationY;
-    }
-
-    /*
-    * Set the wallet of the player
-    *
-    * @param wallet The wallet of the player
-    * @return void
-    */
-    public int getLocationX() {
-        return locationX;
-    }
-
-    /*
-    * Get the x-coordinate of the player
-    *
-    * @return int The x-coordinate of the player
-    */
-    public int getLocationY() {
-        return locationY;
-    }
-
-    /*
-    * Get the path to the avatar of the player
-    *
-    * @return String The path to the avatar of the player
-    */
     public Inventory getInventory() {
         return inventory;
     }
 
+
     /*
-    * Get the inventory of the player
-    *
-    * @return Inventory The inventory of the player
-    */
+     * Get the wallet of the player
+     *
+     * @return Wallet The wallet of the player
+     */
     public Wallet getWallet() {
         return wallet;
     }
 
+
     /*
-    * Get the wallet of the player
-    *
-    * @return Wallet The wallet of the player
-    */
+     * Update the influence of the player
+     *
+     * @param influence The influence to update the player with
+     * @param influenceType The type of influence to update the player with
+     * @return float The updated influence of the player
+     */
+
     public float updateInfluence(float influence, InfluenceType influenceType) {
         if (influenceType == InfluenceType.NEGATIVE) {
             this.influence -= influence;
@@ -136,25 +101,15 @@ public class Player extends DynamicSpriteEntity implements Collider, KeyListener
     }
 
     /*
-    * Update the influence of the player
-    *
-    * @param influence The influence to update the player with
-    * @param influenceType The type of influence to update the player with
-    * @return float The updated influence of the player
-    */
+     * Get the influence of the player
+     *
+     * @return float The influence of the player
+     */
+
     public float getInfluence() {
         return influence;
     }
 
-    /*
-    * Get the influence of the player
-    *
-    * @return float The influence of the player
-    */
-    @Override
-    public Optional<? extends Node> getNode() {
-        return Optional.empty();
-    }
     @Override
     public void onPressedKeysChange(Set<KeyCode> pressedKeys) {
         if(pressedKeys.contains(KeyCode.LEFT)){
