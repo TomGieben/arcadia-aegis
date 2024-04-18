@@ -8,7 +8,7 @@ import org.arcadia.aegis.objects.Player;
 
 public class GameScene extends DynamicScene {
     final private App app;
-    final private String audioPath = "sounds/game_music.mp3";
+    final private String audioPath = "sounds/game_music.wav";
 
     public GameScene(App app){
         this.app = app;
@@ -16,6 +16,7 @@ public class GameScene extends DynamicScene {
     @Override
     public void setupScene() {
         setBackgroundAudio(this.audioPath);
+        setBackgroundAudioVolume(25);
         setBackgroundImage("backgrounds/carpet_casino.png");
     }
 
