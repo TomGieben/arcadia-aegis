@@ -32,7 +32,10 @@ public class GameScene extends DynamicScene {
     @Override
     public void setupEntities() {
         this.renderSlotMachines();
+        this.renderPlayer();
+    }
 
+    private void renderPlayer() {
         MoneyText moneyText = new MoneyText(new Coordinate2D(1, 5));
         addEntity(moneyText);
 

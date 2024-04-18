@@ -34,7 +34,7 @@ public class Player extends DynamicSpriteEntity implements Collider, KeyListener
     * @param inventory The inventory of the player
     */
     public Player(Coordinate2D location, MoneyText moneyText, String playerName) {
-        super("sprites/player.png", location, new Size(50, 80));
+        super("sprites/player.png", location, new Size(50, 60));
         this.moneyText = moneyText;
         moneyText.setMoneyText(0);
 
@@ -52,7 +52,7 @@ public class Player extends DynamicSpriteEntity implements Collider, KeyListener
     * @param inventory The inventory of the player
     */
     public Player(Coordinate2D location, MoneyText moneyText, String playerName, Wallet wallet, Inventory inventory) {
-        super("sprites/idle.png", location, new Size(50,100));
+        super("sprites/idle.png", location, new Size(50,60));
         this.moneyText = moneyText;
         moneyText.setMoneyText(wallet.getAmount());
 
