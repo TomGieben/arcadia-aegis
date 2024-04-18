@@ -9,11 +9,10 @@ import javafx.scene.text.Font;
 import javafx.scene.text.FontWeight;
 import org.arcadia.aegis.App;
 
-public class StartButton extends TextEntity implements MouseButtonPressedListener {
+public class PlayAgainButton extends TextEntity implements MouseButtonPressedListener {
     final private App app;
-
-    public StartButton(App app, Coordinate2D initialLocation) {
-        super(initialLocation, "Play game");
+    public PlayAgainButton(App app, Coordinate2D initialLocation) {
+        super(initialLocation,"Play Again");
         setFill(Color.WHITESMOKE);
         setFont(Font.font("Roboto", FontWeight.BOLD, 30));
 
@@ -21,7 +20,7 @@ public class StartButton extends TextEntity implements MouseButtonPressedListene
     }
 
     @Override
-    public void onMouseButtonPressed(MouseButton button, Coordinate2D coordinate2D){
-        app.setActiveScene(1);
+    public void onMouseButtonPressed(MouseButton button, Coordinate2D coordinate2D) {
+        app.setActiveScene(0);
     }
 }
