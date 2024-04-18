@@ -53,10 +53,10 @@ public class GameScene extends DynamicScene {
             int x = random.nextInt((int)getWidth() - padding);
             int y = random.nextInt((int)getHeight() - padding);
             //TODO create random minigame
-            Minigame minigame = new Minigame("Test", 10, "images/slot_machine.png");
-            SlotMachine slotMachine = new SlotMachine(x, y, minigame);
-
-            addEntity(slotMachine);
+//            Minigame minigame = new Minigame("Test", 10, "images/slot_machine.png");
+//            SlotMachine slotMachine = new SlotMachine(x, y, minigame);
+//
+//            addEntity(slotMachine);
         }
     }
 }

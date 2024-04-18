@@ -1,12 +1,15 @@
 package org.arcadia.aegis.game;
 
+import org.arcadia.aegis.App;
+
 import java.util.ArrayList;
 
 public class Minigame  {
+    private App app;
     private String name;
-    private String slug;
     private float price;
     private String imagePath;
+    private int sceneIndex;
     private ArrayList<Prize> prizes;
 
     /*
@@ -16,9 +19,10 @@ public class Minigame  {
     * @param price The price of the minigame
     * @param imagePath The image path of the minigame
     */
-    public Minigame(String name, float price, String imagePath) {
+    public Minigame(App app, String name, float price, String imagePath, int sceneIndex) {
+        this.app = app;
         this.name = name;
-        this.slug = name.toLowerCase().replace(" ", "-");
+        this.sceneIndex = sceneIndex;
         this.price = price;
         this.imagePath = imagePath;
     }
@@ -72,7 +76,7 @@ public class Minigame  {
     }
 
     public void start() {
-        // Start the minigame
+        this.app.setActiveScene(this.sceneIndex);
     }
 
     public void end() {

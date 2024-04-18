@@ -2,10 +2,12 @@ package org.arcadia.aegis;
 
 import com.github.hanyaeger.api.Size;
 import com.github.hanyaeger.api.YaegerGame;
+import org.arcadia.aegis.game.Minigame;
 import org.arcadia.aegis.objects.Player;
 import org.arcadia.aegis.scenes.EndScene;
 import org.arcadia.aegis.scenes.GameScene;
 import org.arcadia.aegis.scenes.TitleScene;
+import org.arcadia.aegis.scenes.minigames.SlotMinigame;
 
 /**
  * Hello world!
@@ -27,9 +29,21 @@ public class App extends YaegerGame
 
     @Override
     public void setupScenes() {
-        addScene(0, new TitleScene(this));
-        addScene(1, new GameScene(this));
-        addScene(2, new EndScene(this));
+//        addScene(0, new TitleScene(this));
+//        addScene(1, new GameScene(this));
+//        addScene(2, new EndScene(this));
+
+       addScene(3, new SlotMinigame(this));
+
+        Minigame slotMinigame = new Minigame(
+                this,
+                "SlotMinigame",
+                20,
+                "images/slot_machine.png",
+                3
+        );
+
+        slotMinigame.start();
     }
 
     public void setPlayerName(String name) {
