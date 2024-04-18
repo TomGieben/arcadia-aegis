@@ -3,7 +3,6 @@ package org.arcadia.aegis.scenes;
 import com.github.hanyaeger.api.Coordinate2D;
 import com.github.hanyaeger.api.scenes.DynamicScene;
 import org.arcadia.aegis.objects.Player;
-import com.github.hanyaeger.api.AnchorPoint;
 import org.arcadia.aegis.App;
 
 public class GameScene extends DynamicScene {
@@ -14,8 +13,7 @@ public class GameScene extends DynamicScene {
     }
     @Override
     public void setupScene() {
-        setBackgroundImage("backgrounds/titlescreen.jpg");
-    }
+        setBackgroundImage("backgrounds/carpet_casino.png");
     }
 
     @Override

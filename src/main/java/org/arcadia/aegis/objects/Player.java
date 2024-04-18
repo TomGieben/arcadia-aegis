@@ -1,6 +1,7 @@
 package org.arcadia.aegis.objects;
 
 import com.github.hanyaeger.api.Coordinate2D;
+import com.github.hanyaeger.api.Size;
 import com.github.hanyaeger.api.entities.Collider;
 import com.github.hanyaeger.api.entities.SceneBorderTouchingWatcher;
 import com.github.hanyaeger.api.scenes.SceneBorder;
@@ -11,7 +12,6 @@ import org.arcadia.aegis.enums.InfluenceType;
 import org.arcadia.aegis.game.Wallet;
 import org.arcadia.aegis.inventory.Inventory;
 import com.github.hanyaeger.api.entities.impl.DynamicSpriteEntity;
-
 import java.util.Optional;
 import java.util.Set;
 
@@ -32,7 +32,7 @@ public class Player extends DynamicSpriteEntity implements Collider, KeyListener
     * @param inventory The inventory of the player
     */
     public Player(Coordinate2D location) {
-        super("sprites/idle.png", location);
+        super("sprites/idle.png", location, new Size(20,40), 1, 2);
         this.wallet = new Wallet(0);
         this.inventory = new Inventory();
     }
@@ -46,7 +46,7 @@ public class Player extends DynamicSpriteEntity implements Collider, KeyListener
     * @param inventory The inventory of the player
     */
     public Player(Coordinate2D location, Wallet wallet, Inventory inventory) {
-        super("sprites/idle.png", location);
+        super("sprites/idle.png", location, new Size(20,40), 1, 2);
         this.wallet = wallet;
         this.inventory = inventory;
     }

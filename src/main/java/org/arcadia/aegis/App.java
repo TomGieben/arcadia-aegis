@@ -2,6 +2,7 @@ package org.arcadia.aegis;
 
 import com.github.hanyaeger.api.Size;
 import com.github.hanyaeger.api.YaegerGame;
+import org.arcadia.aegis.scenes.GameScene;
 import org.arcadia.aegis.scenes.TitleScene;
 
 /**
