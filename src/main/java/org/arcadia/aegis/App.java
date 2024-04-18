@@ -33,8 +33,6 @@ public class App extends YaegerGame
 //        addScene(1, new GameScene(this));
 //        addScene(2, new EndScene(this));
 
-       addScene(3, new SlotMinigame(this));
-
         Minigame slotMinigame = new Minigame(
                 this,
                 "SlotMinigame",
@@ -42,6 +40,8 @@ public class App extends YaegerGame
                 "images/slot_machine.png",
                 3
         );
+
+        addScene(3, new SlotMinigame(this, slotMinigame));
 
         slotMinigame.start();
     }

@@ -10,21 +10,20 @@ import javafx.scene.text.Font;
 import javafx.scene.text.FontWeight;
 import org.arcadia.aegis.App;
 import org.arcadia.aegis.entities.buttons.PlayAgainButton;
+import org.arcadia.aegis.game.Minigame;
 
 public class SlotMinigame extends DynamicScene {
-    final private String audioPath = "sounds/background_music.mp3";
-    final private String backgroundPath = "backgrounds/car.jpg";
-    final private String carSoundPath = "sounds/car_rev.wav";
-    final private String title = "Floenk";
+    final private String backgroundPath = "backgrounds/blank_slot_machine.png";
     final private App app;
+    final private Minigame minigame;
 
-    public SlotMinigame(App app){
+    public SlotMinigame(App app, Minigame minigame) {
         this.app = app;
+        this.minigame = minigame;
     }
     @Override
     public void setupScene() {
-//        setBackgroundAudio(this.audioPath);
-//        setBackgroundImage(this.backgroundPath);
+        setBackgroundImage(this.backgroundPath);
     }
 
     @Override
@@ -35,7 +34,7 @@ public class SlotMinigame extends DynamicScene {
     private void renderTitle() {
         TextEntity title = new TextEntity(
             new Coordinate2D(getWidth() / 2, getHeight()/ 3),
-            this.title
+            this.minigame.getName()
         );
 
         title.setAnchorPoint(AnchorPoint.TOP_CENTER);

@@ -56,6 +56,15 @@ public class Minigame  {
     }
 
     /*
+     * Get the name of the minigame
+     *
+     * @return String The name of the minigame
+     */
+    public String getName() {
+        return this.name;
+    }
+
+    /*
     * Add a prize to the minigame
     *
     * @param prize The prize to add
