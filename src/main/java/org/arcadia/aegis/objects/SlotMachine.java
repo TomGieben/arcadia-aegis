@@ -116,7 +116,6 @@ public class SlotMachine extends DynamicSpriteEntity implements Collided {
     @Override
     public void onCollision(List<Collider> list) {
         this.app.getPlayer().setSpeed(0);
-        System.out.println("asdasd");
         this.minigame.start();
     }
 }
