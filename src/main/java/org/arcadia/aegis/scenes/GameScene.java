@@ -1,10 +1,9 @@
 package org.arcadia.aegis.scenes;
 
-import com.github.hanyaeger.api.AnchorPoint;
 import com.github.hanyaeger.api.Coordinate2D;
 import com.github.hanyaeger.api.scenes.DynamicScene;
+import org.arcadia.aegis.objects.Player;
 import org.arcadia.aegis.App;
-import org.arcadia.aegis.entities.buttons.StartButton;
 
 public class GameScene extends DynamicScene {
     final private App app;
@@ -14,11 +13,12 @@ public class GameScene extends DynamicScene {
     }
     @Override
     public void setupScene() {
-
+        setBackgroundImage("backgrounds/carpet_casino.png");
     }
 
     @Override
     public void setupEntities() {
-
+        Coordinate2D location = new Coordinate2D(getWidth() / 2, getHeight() / 2);
+        addEntity(new Player(location));
     }
 }

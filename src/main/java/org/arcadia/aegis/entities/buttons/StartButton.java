@@ -21,7 +21,7 @@ public class StartButton extends TextEntity implements MouseButtonPressedListene
     }
 
     @Override
-    public void onMouseButtonPressed(MouseButton button, Coordinate2D coordinate2D) {
+    public void onMouseButtonPressed(MouseButton button, Coordinate2D coordinate2D){
         app.setActiveScene(1);
     }
 }

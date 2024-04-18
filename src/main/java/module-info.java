@@ -6,4 +6,5 @@ module arcadia.aegis {
 
     opens backgrounds;
     opens sounds;
+    opens sprites;
 }

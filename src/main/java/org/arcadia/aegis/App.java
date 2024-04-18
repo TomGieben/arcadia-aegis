@@ -2,7 +2,6 @@ package org.arcadia.aegis;
 
 import com.github.hanyaeger.api.Size;
 import com.github.hanyaeger.api.YaegerGame;
-import org.arcadia.aegis.scenes.EndScene;
 import org.arcadia.aegis.scenes.GameScene;
 import org.arcadia.aegis.scenes.TitleScene;
 
@@ -15,7 +14,6 @@ public class App extends YaegerGame
     public static void main( String[] args )
     {
         launch(args);
-
     }
 
     @Override

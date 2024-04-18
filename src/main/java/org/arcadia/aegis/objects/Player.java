@@ -1,19 +1,24 @@
 package org.arcadia.aegis.objects;
 
+import com.github.hanyaeger.api.Coordinate2D;
+import com.github.hanyaeger.api.Size;
 import com.github.hanyaeger.api.entities.Collider;
+import com.github.hanyaeger.api.entities.SceneBorderTouchingWatcher;
+import com.github.hanyaeger.api.scenes.SceneBorder;
+import com.github.hanyaeger.api.userinput.KeyListener;
 import javafx.scene.Node;
+import javafx.scene.input.KeyCode;
 import org.arcadia.aegis.enums.InfluenceType;
 import org.arcadia.aegis.game.Wallet;
 import org.arcadia.aegis.inventory.Inventory;
-
+import com.github.hanyaeger.api.entities.impl.DynamicSpriteEntity;
 import java.util.Optional;
+import java.util.Set;
 
-public class Player implements Collider {
+public class Player extends DynamicSpriteEntity implements Collider, KeyListener, SceneBorderTouchingWatcher {
 
-    private String name;
     private Wallet wallet;
     private Inventory inventory;
-    private String avatarPath;
     private int locationX;
     private int locationY;
     private float influence;
@@ -26,9 +31,8 @@ public class Player implements Collider {
     * @param wallet The wallet of the player
     * @param inventory The inventory of the player
     */
-    public Player(String name, String avatarPath) {
-        this.name = name;
-        this.avatarPath = avatarPath;
+    public Player(Coordinate2D location) {
+        super("sprites/idle.png", location, new Size(20,40), 1, 2);
         this.wallet = new Wallet(0);
         this.inventory = new Inventory();
     }
@@ -41,9 +45,8 @@ public class Player implements Collider {
     * @param wallet The wallet of the player
     * @param inventory The inventory of the player
     */
-    public Player(String name, String avatarPath, Wallet wallet, Inventory inventory) {
-        this.name = name;
-        this.avatarPath = avatarPath;
+    public Player(Coordinate2D location, Wallet wallet, Inventory inventory) {
+        super("sprites/idle.png", location, new Size(20,40), 1, 2);
         this.wallet = wallet;
         this.inventory = inventory;
     }
@@ -100,15 +103,6 @@ public class Player implements Collider {
     }
 
     /*
-    * Get the y-coordinate of the player
-    *
-    * @return int The y-coordinate of the player
-    */
-    public String getAvatarPath() {
-        return avatarPath;
-    }
-
-    /*
     * Get the path to the avatar of the player
     *
     * @return String The path to the avatar of the player
@@ -160,5 +154,40 @@ public class Player implements Collider {
     @Override
     public Optional<? extends Node> getNode() {
         return Optional.empty();
+    }
+    @Override
+    public void onPressedKeysChange(Set<KeyCode> pressedKeys) {
+        if(pressedKeys.contains(KeyCode.LEFT)){
+            setMotion(3,270d);
+        } else if(pressedKeys.contains(KeyCode.RIGHT)){
+            setMotion(3,90d);
+        } else if(pressedKeys.contains(KeyCode.UP)){
+            setMotion(3,180d);
+        } else if(pressedKeys.contains(KeyCode.DOWN)){
+            setMotion(3,0d);
+        } else if(pressedKeys.isEmpty()){
+            setSpeed(0);
+        }
+    }
+
+    @Override
+    public void notifyBoundaryTouching(SceneBorder sceneBorder) {
+        setSpeed(0);
+
+        switch(sceneBorder){
+            case TOP:
+                setAnchorLocationY(1);
+                break;
+            case BOTTOM:
+                setAnchorLocationY(getSceneHeight() - getHeight() - 1);
+                break;
+            case LEFT:
+                setAnchorLocationX(1);
+                break;
+            case RIGHT:
+                setAnchorLocationX(getSceneWidth() - getWidth() - 1);
+            default:
+                break;
+        }
     }
 }
