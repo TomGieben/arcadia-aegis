@@ -112,9 +112,17 @@ public class Player extends DynamicSpriteEntity implements Collider, KeyListener
 
     @Override
     public void onPressedKeysChange(Set<KeyCode> pressedKeys) {
-        if(pressedKeys.contains(KeyCode.LEFT) || pressedKeys.contains(KeyCode.A)){
+        if (pressedKeys.contains(KeyCode.W) && pressedKeys.contains(KeyCode.D) || pressedKeys.contains(KeyCode.UP) && pressedKeys.contains(KeyCode.RIGHT)) {
+            setMotion(3, 135d);
+        } else if (pressedKeys.contains(KeyCode.W) && pressedKeys.contains(KeyCode.A)  || pressedKeys.contains(KeyCode.UP) && pressedKeys.contains(KeyCode.LEFT)) {
+            setMotion(3, 225);
+        } else if (pressedKeys.contains(KeyCode.S) && pressedKeys.contains(KeyCode.A)  || pressedKeys.contains(KeyCode.DOWN) && pressedKeys.contains(KeyCode.LEFT)) {
+            setMotion(3, 315);
+        } else if (pressedKeys.contains(KeyCode.S) && pressedKeys.contains(KeyCode.D)  || pressedKeys.contains(KeyCode.DOWN) && pressedKeys.contains(KeyCode.RIGHT)) {
+            setMotion(3, 45);
+        } else if(pressedKeys.contains(KeyCode.LEFT) || pressedKeys.contains(KeyCode.A)){
             setMotion(3,270d);
-        } else if(pressedKeys.contains(KeyCode.RIGHT) || pressedKeys.contains(KeyCode.D)){
+        }else if(pressedKeys.contains(KeyCode.RIGHT) || pressedKeys.contains(KeyCode.D)){
             setMotion(3,90d);
         } else if(pressedKeys.contains(KeyCode.UP) || pressedKeys.contains(KeyCode.W)){
             setMotion(3,180d);
