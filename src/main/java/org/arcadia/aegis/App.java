@@ -6,11 +6,15 @@ import com.github.hanyaeger.api.YaegerGame;
 import org.arcadia.aegis.entities.text.MoneyText;
 import org.arcadia.aegis.game.Minigame;
 import org.arcadia.aegis.objects.Player;
+import org.arcadia.aegis.objects.SlotMachine;
 import org.arcadia.aegis.scenes.EndScene;
 import org.arcadia.aegis.scenes.GameScene;
 import org.arcadia.aegis.scenes.TitleScene;
 import org.arcadia.aegis.scenes.minigames.HigherLower;
 import org.arcadia.aegis.scenes.minigames.SlotMinigame;
+
+import java.lang.reflect.Array;
+import java.util.ArrayList;
 
 /**
  * Hello world!
@@ -20,7 +24,8 @@ public class App extends YaegerGame
 {
     private String playerName = "";
     private Player player;
-    public static void main( String[] args )
+    private ArrayList<Minigame> minigames = new ArrayList<Minigame>();
+    final private String audioPath = "sounds/background_music.mp3";    public static void main( String[] args )
     {
         launch(args);
     }
@@ -29,7 +34,7 @@ public class App extends YaegerGame
     public void setupGame() {
         setGameTitle("Arcadia Aegis");
         setSize(new Size(800, 600));
-        this.renderPlayer();
+        setBackgroundAudio(this.audioPath);this.renderPlayer();
     }
 
     @Override
@@ -58,6 +63,7 @@ public class App extends YaegerGame
                 3
         );
 
+        this.minigames.add(slotMinigame);
         addScene(3, new SlotMinigame(this, slotMinigame));
 
         Minigame higherLower = new Minigame(
@@ -68,6 +74,7 @@ public class App extends YaegerGame
                 4
         );
 
+        this.minigames.add(higherLower);
         addScene(4, new HigherLower(this, higherLower));
     }
 
@@ -79,5 +86,9 @@ public class App extends YaegerGame
 
     public Player getPlayer() {
         return this.player;
+    }
+
+    public ArrayList<Minigame> getMinigames() {
+        return this.minigames;
     }
 }

@@ -9,12 +9,12 @@ import org.arcadia.aegis.objects.Player;
 import org.arcadia.aegis.App;
 import org.arcadia.aegis.objects.SlotMachine;
 
+import java.util.ArrayList;
 import java.util.Random;
 
 public class GameScene extends DynamicScene {
     final private App app;
     final private int amountOfSlotMachines = 4;
-    final private String audioPath = "sounds/game_music.mp3";
     final private String backgroundPath = "backgrounds/carpet_casino.png";
     public GameScene(App app){
         this.app = app;
@@ -22,10 +22,6 @@ public class GameScene extends DynamicScene {
 
     @Override
     public void setupScene() {
-        SoundClip sound = new SoundClip(this.audioPath, -1);
-        sound.setVolume(0.1);
-        sound.play();
-
         setBackgroundImage(this.backgroundPath);
     }
 
@@ -43,15 +39,16 @@ public class GameScene extends DynamicScene {
     private void renderSlotMachines() {
         Random random = new Random();
         int padding = 40;
+        ArrayList<Minigame> minigames = this.app.getMinigames();
 
         for (int i = 0; i < this.amountOfSlotMachines; i++) {
             int x = random.nextInt((int)getWidth() - padding);
             int y = random.nextInt((int)getHeight() - padding);
-            //TODO create random minigame
-//            Minigame minigame = new Minigame("Test", 10, "images/slot_machine.png");
-//            SlotMachine slotMachine = new SlotMachine(x, y, minigame);
-//
-//            addEntity(slotMachine);
+            int randomIndex = random.nextInt(minigames.size());
+            Minigame minigame = minigames.get(randomIndex);
+            SlotMachine slotMachine = new SlotMachine(x, y, minigame, this.app);
+
+            addEntity(slotMachine);
         }
     }
 }

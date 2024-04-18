@@ -17,7 +17,6 @@ import org.arcadia.aegis.entities.buttons.StartButton;
 import java.util.Set;
 
 public class TitleScene extends DynamicScene implements KeyListener {
-    final private String audioPath = "sounds/background_music.mp3";
     final private String backgroundPath = "backgrounds/titlescreen.jpg";
 
     private boolean prevWasEmpty = true;
@@ -29,7 +28,6 @@ public class TitleScene extends DynamicScene implements KeyListener {
     }
     @Override
     public void setupScene() {
-        setBackgroundAudio(this.audioPath);
         setBackgroundImage(this.backgroundPath);
     }
 

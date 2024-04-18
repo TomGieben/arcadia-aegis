@@ -7,5 +7,6 @@ module arcadia.aegis {
     opens backgrounds;
     opens sounds;
     opens sprites;
+    opens images;
     opens images.fruits;
 }

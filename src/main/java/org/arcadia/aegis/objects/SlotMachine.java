@@ -2,18 +2,23 @@ package org.arcadia.aegis.objects;
 
 import com.github.hanyaeger.api.Coordinate2D;
 import com.github.hanyaeger.api.Size;
+import com.github.hanyaeger.api.entities.Collided;
+import com.github.hanyaeger.api.entities.Collider;
 import com.github.hanyaeger.api.entities.YaegerEntity;
 import com.github.hanyaeger.api.entities.impl.DynamicSpriteEntity;
 import javafx.scene.Node;
+import org.arcadia.aegis.App;
 import org.arcadia.aegis.game.Minigame;
 
+import java.util.List;
 import java.util.Optional;
 
-public class SlotMachine extends DynamicSpriteEntity {
+public class SlotMachine extends DynamicSpriteEntity implements Collided {
     private double locationX;
     private double locationY;
     private float bet;
     private Minigame minigame;
+    private App app;
 
     /*
     * Constructor
@@ -22,12 +27,13 @@ public class SlotMachine extends DynamicSpriteEntity {
     * @param y The y-coordinate of the slot machine
     * @param minigame The minigame the slot machine is part of
     */
-    public SlotMachine(double x, double y, Minigame minigame) {
+    public SlotMachine(double x, double y, Minigame minigame, App app) {
         super(minigame.getImagePath(), new Coordinate2D(x, y), new Size(60, 70));
 
         this.locationX = x;
         this.locationY = y;
         this.minigame = minigame;
+        this.app = app;
     }
 
     /*
@@ -105,5 +111,12 @@ public class SlotMachine extends DynamicSpriteEntity {
     */
     public void viewSlotMachine() {
 
+    }
+
+    @Override
+    public void onCollision(List<Collider> list) {
+        this.app.getPlayer().setSpeed(0);
+        System.out.println("asdasd");
+        this.minigame.start();
     }
 }
