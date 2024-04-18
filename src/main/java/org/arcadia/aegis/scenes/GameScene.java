@@ -16,7 +16,6 @@ public class GameScene extends DynamicScene {
     final private int amountOfSlotMachines = 4;
     final private String audioPath = "sounds/game_music.mp3";
     final private String backgroundPath = "backgrounds/carpet_casino.png";
-
     public GameScene(App app){
         this.app = app;
     }
@@ -37,12 +36,8 @@ public class GameScene extends DynamicScene {
     }
 
     private void renderPlayer() {
-        MoneyText moneyText = new MoneyText(new Coordinate2D(1, 5));
-        addEntity(moneyText);
-
-        Coordinate2D locationPlayer = new Coordinate2D(getWidth() / 2, getHeight() / 2);
-        Player player = new Player(locationPlayer, moneyText, this.app.getPlayerName());
-        addEntity(player);
+        addEntity(this.app.getPlayer());
+        addEntity(this.app.getPlayer().getMoneyText());
     }
 
     private void renderSlotMachines() {
