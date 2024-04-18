@@ -60,7 +60,7 @@ public class EndScene extends DynamicScene {
 
     private void playRandomSound() {
         SoundClip sound = new SoundClip(this.carSoundPath);
-        sound.setVolume(50);
+        sound.setVolume(1);
 
         sound.play();
     }

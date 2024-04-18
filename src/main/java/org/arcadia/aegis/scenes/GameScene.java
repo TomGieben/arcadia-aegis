@@ -1,6 +1,7 @@
 package org.arcadia.aegis.scenes;
 
 import com.github.hanyaeger.api.Coordinate2D;
+import com.github.hanyaeger.api.media.SoundClip;
 import com.github.hanyaeger.api.scenes.DynamicScene;
 import org.arcadia.aegis.entities.text.MoneyText;
 import org.arcadia.aegis.App;
@@ -15,8 +16,10 @@ public class GameScene extends DynamicScene {
     }
     @Override
     public void setupScene() {
-        setBackgroundAudio(this.audioPath);
-        setBackgroundAudioVolume(25);
+        SoundClip sound = new SoundClip(this.audioPath, -1);
+        sound.setVolume(0.1);
+        sound.play();
+
         setBackgroundImage("backgrounds/carpet_casino.png");
     }
 
