@@ -13,6 +13,7 @@ import org.arcadia.aegis.entities.buttons.StartButton;
 public class TitleScene extends DynamicScene {
     final private String audioPath = "sounds/background_music.mp3";
     final private String backgroundPath = "backgrounds/titlescreen.jpg";
+    final private String title = getStage().getTitle();
     final private App app;
 
     public TitleScene(App app){
@@ -43,7 +44,7 @@ public class TitleScene extends DynamicScene {
     private void renderTitle() {
         TextEntity title = new TextEntity(
             new Coordinate2D(getWidth() / 2, getHeight()/ 3),
-            getStage().getTitle()
+            this.title
         );
 
         title.setAnchorPoint(AnchorPoint.TOP_CENTER);
