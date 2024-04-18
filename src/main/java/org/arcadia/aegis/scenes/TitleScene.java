@@ -22,6 +22,7 @@ public class TitleScene extends DynamicScene implements KeyListener {
 
     private boolean prevWasEmpty = true;
     final private App app;
+    private TextEntity nameText;
 
     public TitleScene(App app){
         this.app = app;
@@ -37,6 +38,7 @@ public class TitleScene extends DynamicScene implements KeyListener {
         this.renderStartButton();
         this.renderTitle();
         this.renderNameInput();
+        this.renderPlayerName();
     }
 
     private void renderStartButton() {
@@ -76,19 +78,18 @@ public class TitleScene extends DynamicScene implements KeyListener {
     }
 
     private void renderPlayerName() {
-        //TODO
-        String name = this.app.getPlayerName();
-
-        TextEntity name = new TextEntity(
-                new Coordinate2D(getWidth() / 2, 600),
-                name
+        TextEntity nameText = new TextEntity(
+            new Coordinate2D(getWidth() / 2, 550),
+            ""
         );
 
-        name.setAnchorPoint(AnchorPoint.BOTTOM_CENTER);
-        name.setFill(Color.WHITESMOKE);
-        name.setFont(Font.font("Roboto", FontWeight.BOLD, 20));
+        nameText.setAnchorPoint(AnchorPoint.BOTTOM_CENTER);
+        nameText.setFill(Color.BLACK);
+        nameText.setFont(Font.font("Roboto", FontWeight.BOLD, 20));
 
-        addEntity(name);
+        this.nameText = nameText;
+
+        addEntity(nameText);
     }
 
     @Override
@@ -117,6 +118,6 @@ public class TitleScene extends DynamicScene implements KeyListener {
 
         this.app.setPlayerName(playerName);
 
-        this.renderPlayerName();
+        this.nameText.setText(playerName);
     }
 }
