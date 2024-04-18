@@ -46,7 +46,7 @@ public class GameScene extends DynamicScene {
 
     private void renderSlotMachines() {
         Random random = new Random();
-        int padding = 20;
+        int padding = 40;
 
         for (int i = 0; i < this.amountOfSlotMachines; i++) {
             int x = random.nextInt((int)getWidth() - padding);
