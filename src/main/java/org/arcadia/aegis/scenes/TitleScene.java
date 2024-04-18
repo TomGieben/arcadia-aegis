@@ -8,6 +8,7 @@ import org.arcadia.aegis.entities.buttons.StartButton;
 public class TitleScene extends DynamicScene {
     @Override
     public void setupScene() {
+        setBackgroundAudio("sounds/background-music.mp3");
         setBackgroundImage("backgrounds/titlescreen.jpg");
     }
 
