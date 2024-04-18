@@ -1,10 +1,17 @@
 package org.arcadia.aegis.objects;
 
+import com.github.hanyaeger.api.Coordinate2D;
+import com.github.hanyaeger.api.Size;
+import com.github.hanyaeger.api.entities.YaegerEntity;
+import com.github.hanyaeger.api.entities.impl.DynamicSpriteEntity;
+import javafx.scene.Node;
 import org.arcadia.aegis.game.Minigame;
 
-public class SlotMachine {
-    private int locationX;
-    private int locationY;
+import java.util.Optional;
+
+public class SlotMachine extends DynamicSpriteEntity {
+    private double locationX;
+    private double locationY;
     private float bet;
     private Minigame minigame;
 
@@ -15,7 +22,9 @@ public class SlotMachine {
     * @param y The y-coordinate of the slot machine
     * @param minigame The minigame the slot machine is part of
     */
-    public SlotMachine(int x, int y, Minigame minigame) {
+    public SlotMachine(double x, double y, Minigame minigame) {
+        super(minigame.getImagePath(), new Coordinate2D(x, y), new Size(60, 70));
+
         this.locationX = x;
         this.locationY = y;
         this.minigame = minigame;
@@ -56,7 +65,7 @@ public class SlotMachine {
     *
     * @return int The y-coordinate of the slot machine
     */
-    public int getLocationY() {
+    public double getLocationY() {
         return locationY;
     }
 
@@ -65,7 +74,7 @@ public class SlotMachine {
     *
     * @return int The x-coordinate of the slot machine
     */
-    public int getLocationX() {
+    public double getLocationX() {
         return locationX;
     }
 
@@ -75,7 +84,7 @@ public class SlotMachine {
     * @param x The x-coordinate of the slot machine
     * @return void
     */
-    public void setLocationY(int locationY) {
+    public void setLocationY(double locationY) {
         this.locationY = locationY;
     }
 
@@ -85,7 +94,7 @@ public class SlotMachine {
     * @param y The y-coordinate of the slot machine
     * @return void
     */
-    public void setLocationX(int locationX) {
+    public void setLocationX(double locationX) {
         this.locationX = locationX;
     }
 
