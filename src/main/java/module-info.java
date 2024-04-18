@@ -5,4 +5,5 @@ module arcadia.aegis {
     exports org.arcadia.aegis;
 
     opens backgrounds;
+    opens sounds;
 }
