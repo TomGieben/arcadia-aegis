@@ -14,7 +14,8 @@ import java.util.Random;
 public class GameScene extends DynamicScene {
     final private App app;
     final private int amountOfSlotMachines = 4;
-    final private String audioPath = "sounds/game_music.wav";
+    final private String audioPath = "sounds/game_music.mp3";
+    final private String backgroundPath = "backgrounds/carpet_casino.png";
 
     public GameScene(App app){
         this.app = app;
@@ -26,7 +27,7 @@ public class GameScene extends DynamicScene {
         sound.setVolume(0.1);
         sound.play();
 
-        setBackgroundImage("backgrounds/carpet_casino.png");
+        setBackgroundImage(this.backgroundPath);
     }
 
     @Override
@@ -40,7 +41,7 @@ public class GameScene extends DynamicScene {
         addEntity(moneyText);
 
         Coordinate2D locationPlayer = new Coordinate2D(getWidth() / 2, getHeight() / 2);
-        Player player = new Player(locationPlayer, moneyText, "TEMPPLAYERNAME");
+        Player player = new Player(locationPlayer, moneyText, this.app.getPlayerName());
         addEntity(player);
     }
 
