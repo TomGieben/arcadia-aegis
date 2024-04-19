@@ -1,18 +1,24 @@
 package org.arcadia.aegis.objects;
 
+import com.github.hanyaeger.api.Coordinate2D;
+import com.github.hanyaeger.api.Size;
 import com.github.hanyaeger.api.entities.Collided;
 import com.github.hanyaeger.api.entities.Collider;
+import com.github.hanyaeger.api.entities.impl.DynamicSpriteEntity;
 import javafx.scene.Node;
+import org.arcadia.aegis.App;
 import org.arcadia.aegis.inventory.Inventory;
 
 import java.util.List;
 import java.util.Optional;
 
-public class Bar implements Collided {
+public class Bar extends DynamicSpriteEntity implements Collided {
     private Inventory inventory;
     private String imagePath;
-    private int locationX;
-    private int locationY;
+    private App app;
+    private int sceneIndex = 5;
+    private double locationX;
+    private double locationY;
 
     /*
     * Constructor
@@ -22,11 +28,14 @@ public class Bar implements Collided {
     * @param y The y-coordinate of the bar
      * @param inventory The inventory of the bar
     */
-    public Bar(String imagePath, int x, int y) {
+    public Bar(String imagePath, double x, double y, App app) {
+        super(imagePath, new Coordinate2D(x, y), new Size(200, 140));
+
         this.imagePath = imagePath;
         this.locationX = x;
         this.locationY = y;
         this.inventory = new Inventory();
+        this.app = app;
     }
 
     /*
@@ -37,11 +46,14 @@ public class Bar implements Collided {
     * @param y The y-coordinate of the bar
     * @param inventory The inventory of the bar
     */
-    public Bar(String imagePath, int x, int y, Inventory inventory) {
+    public Bar(String imagePath, double x, double y, App app, Inventory inventory) {
+        super(imagePath, new Coordinate2D(x, y), new Size(200, 140));
+
         this.imagePath = imagePath;
         this.locationX = x;
         this.locationY = y;
-        this.inventory = inventory;
+        this.inventory = new Inventory();
+        this.app = app;
     }
 
     /*
@@ -67,7 +79,7 @@ public class Bar implements Collided {
     *
     * @return int The x-coordinate of the bar
     */
-    public int getLocationX() {
+    public double getLocationX() {
         return locationX;
     }
 
@@ -76,7 +88,7 @@ public class Bar implements Collided {
     *
     * @return int The y-coordinate of the bar
     */
-    public int getLocationY() {
+    public double getLocationY() {
         return locationY;
     }
 
@@ -87,7 +99,7 @@ public class Bar implements Collided {
     * @return void
     */
     public void viewBar(){
-        return;
+        this.app.setActiveScene(this.sceneIndex);
     }
 
     /*
@@ -98,18 +110,8 @@ public class Bar implements Collided {
     */
     @Override
     public void onCollision(List<Collider> list) {
-
-    }
-
-    /*
-    * Set the x-coordinate of the bar
-    *
-    * @param x The x-coordinate of the bar
-    * @return void
-    */
-    @Override
-    public Optional<? extends Node> getNode() {
-        return Optional.empty();
+        this.app.getPlayer().setSpeed(0);
+        this.viewBar();
     }
 }
 

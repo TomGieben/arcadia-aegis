@@ -1,8 +1,13 @@
 package org.arcadia.aegis.game;
 
 import org.arcadia.aegis.enums.InfluenceType;
+import org.arcadia.aegis.inventory.InventoryItem;
 
-public class Drink {
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Random;
+
+public class Drink extends InventoryItem {
     private String name;
     private float influenceAmount;
     private InfluenceType influenceType;

@@ -1,8 +1,9 @@
 package org.arcadia.aegis.game;
 
 import org.arcadia.aegis.enums.PrizeType;
+import org.arcadia.aegis.inventory.InventoryItem;
 
-public class Prize {
+public class Prize extends InventoryItem {
     private String name;
     private PrizeType type;
     private String value;
