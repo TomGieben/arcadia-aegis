@@ -25,6 +25,7 @@ public class Player extends DynamicSpriteEntity implements Collider, KeyListener
     private String playerName;
 
     private MoneyText moneyText;
+    final private float defaultMoney = 100;
     /*
     * Constructor
     *
@@ -36,11 +37,11 @@ public class Player extends DynamicSpriteEntity implements Collider, KeyListener
     public Player(Coordinate2D location, MoneyText moneyText, String playerName) {
         super("sprites/player.png", location, new Size(50, 60));
         this.moneyText = moneyText;
-        moneyText.setMoneyText(100);
-
+        this.wallet = new Wallet(this.defaultMoney);
         this.playerName = playerName;
-        this.wallet = new Wallet(100);
         this.inventory = new Inventory();
+
+        this.moneyText.setMoneyText(this.wallet.getAmount());
     }
 
     /*
@@ -54,11 +55,11 @@ public class Player extends DynamicSpriteEntity implements Collider, KeyListener
     public Player(Coordinate2D location, MoneyText moneyText, String playerName, Wallet wallet, Inventory inventory) {
         super("sprites/idle.png", location, new Size(50,60));
         this.moneyText = moneyText;
-        moneyText.setMoneyText(wallet.getAmount());
-
-        this.playerName = playerName;
         this.wallet = wallet;
+        this.playerName = playerName;
         this.inventory = inventory;
+
+        this.moneyText.setMoneyText(this.wallet.getAmount());
     }
 
     /*

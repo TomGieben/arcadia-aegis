@@ -40,7 +40,9 @@ public class App extends YaegerGame
     public void setupGame() {
         setGameTitle("Arcadia Aegis");
         setSize(new Size(800, 600));
-        setBackgroundAudio(this.audioPath);this.renderPlayer();
+        setBackgroundAudio(this.audioPath);
+        setBackgroundAudioVolume(0.2);
+        this.renderPlayer();
     }
 
     @Override
