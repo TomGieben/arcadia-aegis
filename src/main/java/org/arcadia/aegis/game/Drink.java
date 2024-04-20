@@ -3,10 +3,6 @@ package org.arcadia.aegis.game;
 import org.arcadia.aegis.enums.InfluenceType;
 import org.arcadia.aegis.inventory.InventoryItem;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Random;
-
 public class Drink extends InventoryItem {
     private String name;
     private float influenceAmount;
@@ -20,13 +16,15 @@ public class Drink extends InventoryItem {
     * @param name The name of the drink
     * @param influenceAmount The amount of influence the drink has
     * @param influenceType The type of influence the drink has
+    * @param imagePath The image path of the drink
     * @param price The price of the drink
     */
-    public Drink(String name, float influenceAmount, InfluenceType influenceType, float price) {
+    public Drink(String name, float influenceAmount, InfluenceType influenceType, float price, String imagePath) {
         this.name = name;
         this.influenceAmount = influenceAmount;
         this.influenceType = influenceType;
         this.price = price;
+        this.imagePath = imagePath;
     }
 
     /*

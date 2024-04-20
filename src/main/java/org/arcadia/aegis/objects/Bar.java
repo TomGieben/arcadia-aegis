@@ -7,8 +7,11 @@ import com.github.hanyaeger.api.entities.Collider;
 import com.github.hanyaeger.api.entities.impl.DynamicSpriteEntity;
 import javafx.scene.Node;
 import org.arcadia.aegis.App;
+import org.arcadia.aegis.enums.InfluenceType;
+import org.arcadia.aegis.game.Drink;
 import org.arcadia.aegis.inventory.Inventory;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -36,6 +39,8 @@ public class Bar extends DynamicSpriteEntity implements Collided {
         this.locationY = y;
         this.inventory = new Inventory();
         this.app = app;
+
+        this.initDrinks();
     }
 
     /*
@@ -54,6 +59,19 @@ public class Bar extends DynamicSpriteEntity implements Collided {
         this.locationY = y;
         this.inventory = new Inventory();
         this.app = app;
+
+        this.initDrinks();
+    }
+
+    private void initDrinks() {
+        List<Drink> drinks = new ArrayList<>();
+        drinks.add(new Drink("Cola", 250, InfluenceType.POSITIVE, 2.5f, "images/drinks/cola.png"));
+        drinks.add(new Drink("Beer", 250, InfluenceType.NEGATIVE, 2.5f, "images/drinks/beer.png"));
+        drinks.add(new Drink("Orange Juice", 250, InfluenceType.POSITIVE, 2.5f, "images/drinks/orange_juice.png"));
+
+        for (Drink drink : drinks) {
+            this.getInventory().store(drink);
+        }
     }
 
     /*

@@ -9,6 +9,8 @@ import org.arcadia.aegis.game.Drink;
 import org.arcadia.aegis.game.Minigame;
 import org.arcadia.aegis.objects.Bar;
 import org.arcadia.aegis.objects.Player;
+import org.arcadia.aegis.objects.SlotMachine;
+import org.arcadia.aegis.scenes.*;
 import org.arcadia.aegis.scenes.BarScene;
 import org.arcadia.aegis.scenes.EndScene;
 import org.arcadia.aegis.scenes.GameScene;
@@ -54,6 +56,7 @@ public class App extends YaegerGame
 
         this.renderMinigames();
         this.renderBar();
+        this.renderInventory();
     }
 
     public void setPlayerName(String name) {
@@ -96,11 +99,11 @@ public class App extends YaegerGame
         String imagePath = "images/bar.png";
         this.bar = new Bar(imagePath, 100, 200, this);
 
-        this.bar.getInventory().store(new Drink("Cola", 250, InfluenceType.POSITIVE, 2.5f));
-        this.bar.getInventory().store(new Drink("Beer", 250, InfluenceType.NEGATIVE, 2.5f));
-        this.bar.getInventory().store(new Drink("Orange Juice", 250, InfluenceType.POSITIVE, 2.5f));
-
         addScene(5, new BarScene(this));
+    }
+
+    private void renderInventory() {
+        addScene(6, new InventoryScene(this));
     }
 
     private void renderPlayer() {
