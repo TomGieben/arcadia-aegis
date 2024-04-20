@@ -14,8 +14,6 @@ import java.util.List;
 import java.util.Optional;
 
 public class SlotMachine extends DynamicSpriteEntity implements Collided {
-    private double locationX;
-    private double locationY;
     private float bet;
     private Minigame minigame;
     private App app;
@@ -23,15 +21,11 @@ public class SlotMachine extends DynamicSpriteEntity implements Collided {
     /*
     * Constructor
     *
-    * @param x The x-coordinate of the slot machine
-    * @param y The y-coordinate of the slot machine
     * @param minigame The minigame the slot machine is part of
     */
-    public SlotMachine(double x, double y, Minigame minigame, App app) {
-        super(minigame.getImagePath(), new Coordinate2D(x, y), new Size(60, 70));
+    public SlotMachine(Coordinate2D locationSlotMachine, Minigame minigame, App app) {
+        super(minigame.getImagePath(), locationSlotMachine, new Size(60, 70));
 
-        this.locationX = x;
-        this.locationY = y;
         this.minigame = minigame;
         this.app = app;
     }
@@ -64,53 +58,6 @@ public class SlotMachine extends DynamicSpriteEntity implements Collided {
     */
     public float getMultiplier(float bet, float price) {
         return bet / price;
-    }
-
-    /*
-    * Get the location of the slot machine
-    *
-    * @return int The y-coordinate of the slot machine
-    */
-    public double getLocationY() {
-        return locationY;
-    }
-
-    /*
-    * Get the location of the slot machine
-    *
-    * @return int The x-coordinate of the slot machine
-    */
-    public double getLocationX() {
-        return locationX;
-    }
-
-    /*
-    * Set the location of the slot machine
-    *
-    * @param x The x-coordinate of the slot machine
-    * @return void
-    */
-    public void setLocationY(double locationY) {
-        this.locationY = locationY;
-    }
-
-    /*
-    * Set the location of the slot machine
-    *
-    * @param y The y-coordinate of the slot machine
-    * @return void
-    */
-    public void setLocationX(double locationX) {
-        this.locationX = locationX;
-    }
-
-    /*
-    * Get the minigame the slot machine is part of
-    *
-    * @return Minigame The minigame the slot machine is part of
-    */
-    public void viewSlotMachine() {
-
     }
 
     @Override

@@ -148,7 +148,9 @@ public class App extends YaegerGame
             }
         }
 
-        this.slotmachines.add(new SlotMachine(x, y, minigame, this));
+        Coordinate2D locationSlotMachine = new Coordinate2D(x, y);
+        this.coordinates.add(locationSlotMachine);
+        this.slotmachines.add(new SlotMachine(locationSlotMachine, minigame, this));
     }
 
     private boolean isCloseToExistingLocation(double x, double y) {
