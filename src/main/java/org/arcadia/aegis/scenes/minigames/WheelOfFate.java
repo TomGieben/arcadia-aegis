@@ -11,10 +11,14 @@ import javafx.scene.text.FontWeight;
 import org.arcadia.aegis.App;
 import org.arcadia.aegis.entities.buttons.ReturnButton;
 import org.arcadia.aegis.entities.buttons.TurnWheelButton;
+import org.arcadia.aegis.entities.text.MoneyText;
+import org.arcadia.aegis.entities.text.PrizeText;
 import org.arcadia.aegis.enums.PrizeType;
+import org.arcadia.aegis.game.Drink;
 import org.arcadia.aegis.game.MainPrize;
 import org.arcadia.aegis.game.Minigame;
 import org.arcadia.aegis.game.Prize;
+import org.arcadia.aegis.inventory.InventoryItem;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -26,9 +30,9 @@ public class WheelOfFate extends DynamicScene {
     final private String spinSound = "sounds/prize_wheel_spin.wav";
     final private App app;
     final private Minigame minigame;
-
+    private PrizeText prizeText;
     private Map<String, String> moneyPrizeMap = new HashMap<>();
-    private Map<String, String> drinkPrizeMap = new HashMap<>();
+    private ArrayList<InventoryItem> itemPrizeMap;
 
 
     public WheelOfFate(App app, Minigame minigame) {
@@ -47,6 +51,12 @@ public class WheelOfFate extends DynamicScene {
         this.renderTitle();
         this.renderSpinButton();
         this.renderReturnButton();
+
+        addEntity(this.app.getPlayer().getMoneyText());
+
+        PrizeText prizeText = new PrizeText(new Coordinate2D(50, 50));
+        addEntity(prizeText);
+        this.prizeText = prizeText;
     }
     private void renderReturnButton() {
         ReturnButton returnButton = new ReturnButton(this.app, new Coordinate2D(getWidth() - 120, getHeight() - 40), 1);
@@ -78,11 +88,29 @@ public class WheelOfFate extends DynamicScene {
     }
 
     private void awardPrize(Prize prize) {
+        this.playSound("sounds/win_sound.wav");
+
         if (PrizeType.MONEY == prize.getType()) {
             this.app.getPlayer().getWallet().deposit(Integer.parseInt(prize.getValue()));
             this.app.getPlayer().getMoneyText().setMoneyText(this.app.getPlayer().getWallet().getAmount());
+            this.prizeText.setPrizeText("You have gained: " + prize.getValue() + " Bucks");
         } else if (PrizeType.DRINK == prize.getType() && PrizeType.MAINPRIZE == prize.getType()) {
-            this.app.getPlayer().getInventory().store(prize);
+            InventoryItem inventoryItem = prize;
+
+            if (PrizeType.DRINK == prize.getType()) {
+                String prizeName = prize.getName();
+                for (InventoryItem item : this.itemPrizeMap) {
+                    if (item instanceof Drink && ((Drink) item).getName().equals(prizeName)) {
+                        inventoryItem = item;
+                        this.prizeText.setPrizeText("You have won drink: " + ((Drink) inventoryItem).getName());
+                        break;
+                    }
+                }
+            } else if (PrizeType.MAINPRIZE == prize.getType()) {
+                this.prizeText.setPrizeText("You have the main prize");
+            }
+
+            this.app.getPlayer().getInventory().store(inventoryItem);
         }
     }
 
@@ -103,19 +131,15 @@ public class WheelOfFate extends DynamicScene {
 
     private void createPrizeMapping() {
         Map<String, String> moneyPrizeMap = new HashMap<>();
-        moneyPrizeMap.put("Cash", "20");
-        moneyPrizeMap.put("Gift Card", "40");
-        moneyPrizeMap.put("Voucher", "80");
+        moneyPrizeMap.put("Cash", "80");
+        moneyPrizeMap.put("Gift Card", "200");
+        moneyPrizeMap.put("Voucher", "400");
         moneyPrizeMap.put("Check", "5000");
 
-        Map<String, String> drinkPrizeMap = new HashMap<>();
-        drinkPrizeMap.put("Wine", "2");
-        drinkPrizeMap.put("Whiskey", "4");
-        drinkPrizeMap.put("Cocktail", "3");
-        drinkPrizeMap.put("Beer", "1");
+        ArrayList<InventoryItem> items = this.app.getBar().getInventory().all();
 
         this.moneyPrizeMap = moneyPrizeMap;
-        this.drinkPrizeMap = drinkPrizeMap;
+        this.itemPrizeMap = items;
     }
     private Prize createRandomPrize() {
         Random random = new Random();
@@ -123,19 +147,21 @@ public class WheelOfFate extends DynamicScene {
         int randomIndex = random.nextInt(prizeTypes.length);
         PrizeType randomPrize = prizeTypes[randomIndex];
 
-        String randomPrizeName;
-        String randomPrizeValue;
+        String randomPrizeName = "Default Prize";
+        String randomPrizeValue = "0";
+
         if (randomPrize == PrizeType.MONEY && !this.moneyPrizeMap.isEmpty()) {
             randomIndex = random.nextInt(this.moneyPrizeMap.size());
             randomPrizeName = (String) this.moneyPrizeMap.keySet().toArray()[randomIndex];
             randomPrizeValue = this.moneyPrizeMap.get(randomPrizeName);
-        } else if (randomPrize == PrizeType.DRINK && !this.drinkPrizeMap.isEmpty()) {
-            randomIndex = random.nextInt(this.drinkPrizeMap.size());
-            randomPrizeName = (String) this.drinkPrizeMap.keySet().toArray()[randomIndex];
-            randomPrizeValue = this.drinkPrizeMap.get(randomPrizeName);
-        } else {
-            randomPrizeName = "Default Prize";
-            randomPrizeValue = "0";
+        } else if (randomPrize == PrizeType.DRINK && !this.itemPrizeMap.isEmpty()) {
+            randomIndex = random.nextInt(this.itemPrizeMap.size());
+            InventoryItem randomItem = this.itemPrizeMap.get(randomIndex);
+
+            if (randomItem instanceof Drink) {
+                randomPrizeName = ((Drink) randomItem).getName();
+                randomPrizeValue = "Drink";
+            }
         }
 
        return new Prize(randomPrize, randomPrizeName, randomPrizeValue);
@@ -169,5 +195,20 @@ public class WheelOfFate extends DynamicScene {
         button.setFont(Font.font("Roboto", FontWeight.BOLD, 40));
 
         addEntity(button);
+    }
+
+    public Minigame getMinigame() {
+        return this.minigame;
+    }
+
+    public App getApp() {
+        return this.app;
+    }
+
+    private void playSound(String path) {
+        SoundClip sound = new SoundClip(path);
+        sound.setVolume(0.5);
+
+        sound.play();
     }
 }
