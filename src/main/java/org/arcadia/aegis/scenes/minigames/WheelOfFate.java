@@ -48,13 +48,12 @@ public class WheelOfFate extends DynamicScene {
 
     @Override
     public void setupEntities() {
-        this.renderTitle();
         this.renderSpinButton();
         this.renderReturnButton();
 
         addEntity(this.app.getPlayer().getMoneyText());
 
-        PrizeText prizeText = new PrizeText(new Coordinate2D(50, 5));
+        PrizeText prizeText = new PrizeText(new Coordinate2D(5, 50));
         addEntity(prizeText);
         this.prizeText = prizeText;
     }
@@ -168,19 +167,6 @@ public class WheelOfFate extends DynamicScene {
         }
 
        return new Prize(randomPrize, randomPrizeName, randomPrizeValue);
-    }
-
-    private void renderTitle() {
-        TextEntity title = new TextEntity(
-                new Coordinate2D(getWidth() / 2, 5),
-                this.minigame.getName()
-        );
-
-        title.setAnchorPoint(AnchorPoint.TOP_CENTER);
-        title.setFill(Color.WHITESMOKE);
-        title.setFont(Font.font("Roboto", FontWeight.BOLD, 40));
-
-        addEntity(title);
     }
 
     private void playSpinSound() {
