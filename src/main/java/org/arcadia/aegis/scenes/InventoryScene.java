@@ -10,22 +10,26 @@ import javafx.scene.text.FontWeight;
 import org.arcadia.aegis.App;
 import org.arcadia.aegis.entities.buttons.BuyButton;
 import org.arcadia.aegis.entities.buttons.ReturnButton;
+import org.arcadia.aegis.entities.buttons.UseButton;
 import org.arcadia.aegis.game.Drink;
+import org.arcadia.aegis.game.MainPrize;
+import org.arcadia.aegis.game.Prize;
 import org.arcadia.aegis.inventory.Inventory;
 import org.arcadia.aegis.inventory.InventoryItem;
 import org.arcadia.aegis.objects.Bar;
 import org.arcadia.aegis.objects.DrinkEnitity;
+import org.arcadia.aegis.objects.InventoryItemEntity;
 
 import java.util.ArrayList;
 
-public class BarScene extends DynamicScene {
-    final private String backgroundPath = "backgrounds/bar.jpg";
-    final private String title = "The bar";
+public class InventoryScene extends DynamicScene {
+    final private String backgroundPath = "backgrounds/inventory.jpg";
+    final private String title = "Inventory";
     final private App app;
-    final private Bar bar;
-    public BarScene(App app) {
+    final private Inventory inventory;
+    public InventoryScene(App app) {
         this.app = app;
-        this.bar = app.getBar();
+        this.inventory = app.getPlayer().getInventory();
     }
     @Override
     public void setupScene() {
@@ -37,47 +41,50 @@ public class BarScene extends DynamicScene {
         this.renderTitle();
         this.renderReturnButton();
 
-        this.renderDrinks();
+        this.renderItems();
     }
 
-    private void renderDrinks() {
-        Inventory inventory = this.bar.getInventory();
-        ArrayList<InventoryItem> items = inventory.all();
+    private void renderItems() {
+        ArrayList<InventoryItem> items = this.inventory.all();
         int counter = 0;
 
         for (InventoryItem item : items) {
-            if(item instanceof Drink) {
-                Drink drink = (Drink) item;
+            this.renderUseButton(item, counter);
 
-                this.renderBuyButton(drink, counter);
-
-                counter++;
-            }
+            counter++;
         }
     }
 
-    private void renderBuyButton(Drink drink, int counter) {
+    private void renderUseButton(InventoryItem item, int counter) {
         int padding = 60;
         double baseX = padding + (counter * 100);
         double baseY = padding;
-        DrinkEnitity drinkEnitity = new DrinkEnitity(baseX, (baseY + 30), drink.getImagePath());
-        TextEntity price = new TextEntity(
-                new Coordinate2D(baseX, (baseY + 130)),
-                Double.toString(drink.getPrice())
-        );
+        InventoryItemEntity inventoryItemEntity = null;
 
-        price.setFill(Color.DARKGOLDENROD);
-        price.setFont(Font.font("Roboto", FontWeight.BOLD, 30));
+        if (item instanceof Drink) {
+            Drink drink = (Drink) item;
+            inventoryItemEntity = new InventoryItemEntity(
+                    baseX,
+                    baseY + 30,
+                    drink.getImagePath()
+            );
+        } else if (item instanceof MainPrize) {
+            MainPrize mainPrize = (MainPrize) item;
+            inventoryItemEntity = new InventoryItemEntity(
+                    baseX,
+                    baseY + 30,
+                    mainPrize.getImagePath()
+            );
+        }
 
-        BuyButton buyButton = new BuyButton(
-                drink,
+        UseButton useButton = new UseButton(
+                item,
                 this.app,
                 new Coordinate2D(baseX, baseY)
         );
 
-        addEntity(buyButton);
-        addEntity(drinkEnitity);
-        addEntity(price);
+        addEntity(useButton);
+        addEntity(inventoryItemEntity);
     }
 
     private void renderTitle() {

@@ -9,5 +9,6 @@ module arcadia.aegis {
     opens sprites;
     opens images;
     opens images.fruits;
+    opens images.drinks;
     opens images.prizes;
 }
