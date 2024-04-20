@@ -54,7 +54,7 @@ public class WheelOfFate extends DynamicScene {
 
         addEntity(this.app.getPlayer().getMoneyText());
 
-        PrizeText prizeText = new PrizeText(new Coordinate2D(50, 50));
+        PrizeText prizeText = new PrizeText(new Coordinate2D(50, 5));
         addEntity(prizeText);
         this.prizeText = prizeText;
     }
@@ -64,6 +64,7 @@ public class WheelOfFate extends DynamicScene {
     }
 
     public void spin() {
+        this.prizeText.setPrizeText("");
         this.playSpinSound();
         ArrayList<Prize> prizes = this.createPrizes();
 
@@ -94,7 +95,7 @@ public class WheelOfFate extends DynamicScene {
             this.app.getPlayer().getWallet().deposit(Integer.parseInt(prize.getValue()));
             this.app.getPlayer().getMoneyText().setMoneyText(this.app.getPlayer().getWallet().getAmount());
             this.prizeText.setPrizeText("You have gained: " + prize.getValue() + " Bucks");
-        } else if (PrizeType.DRINK == prize.getType() && PrizeType.MAINPRIZE == prize.getType()) {
+        } else if (PrizeType.DRINK == prize.getType() || PrizeType.MAINPRIZE == prize.getType()) {
             InventoryItem inventoryItem = prize;
 
             if (PrizeType.DRINK == prize.getType()) {
@@ -111,6 +112,8 @@ public class WheelOfFate extends DynamicScene {
             }
 
             this.app.getPlayer().getInventory().store(inventoryItem);
+        } else {
+            this.prizeText.setPrizeText("You have nothing");
         }
     }
 

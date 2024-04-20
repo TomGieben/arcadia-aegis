@@ -10,6 +10,7 @@ import javafx.scene.text.Font;
 import javafx.scene.text.FontWeight;
 import org.arcadia.aegis.App;
 import org.arcadia.aegis.game.Drink;
+import org.arcadia.aegis.game.MainPrize;
 import org.arcadia.aegis.game.Wallet;
 import org.arcadia.aegis.inventory.InventoryItem;
 import org.arcadia.aegis.objects.InventoryItemEntity;
@@ -33,7 +34,12 @@ public class UseButton extends TextEntity implements MouseButtonPressedListener 
     public void onMouseButtonPressed(MouseButton button, Coordinate2D coordinate2D){
         Player player = this.app.getPlayer();
 
-        player.getInventory().destroy(item);
+        if (this.item instanceof MainPrize) {
+            this.app.setActiveScene(2);
+            return;
+        }
+
+        player.getInventory().destroy(this.item);
 
         //TODO make the drink have influence on a minigame
 
