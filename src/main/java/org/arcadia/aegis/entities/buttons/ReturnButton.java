@@ -24,6 +24,7 @@ public class ReturnButton extends TextEntity implements MouseButtonPressedListen
 
     @Override
     public void onMouseButtonPressed(MouseButton button, Coordinate2D coordinate2D){
+        this.app.getPlayer().setAnchorLocation(new Coordinate2D(400, 300));
         app.setActiveScene(this.sceneId);
     }
 }

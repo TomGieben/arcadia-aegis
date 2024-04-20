@@ -20,8 +20,6 @@ public class Bar extends DynamicSpriteEntity implements Collided {
     private String imagePath;
     private App app;
     private int sceneIndex = 5;
-    private double locationX;
-    private double locationY;
 
     /*
     * Constructor
@@ -31,12 +29,10 @@ public class Bar extends DynamicSpriteEntity implements Collided {
     * @param y The y-coordinate of the bar
      * @param inventory The inventory of the bar
     */
-    public Bar(String imagePath, double x, double y, App app) {
-        super(imagePath, new Coordinate2D(x, y), new Size(200, 140));
+    public Bar(String imagePath, Coordinate2D location, App app) {
+        super(imagePath, location, new Size(200, 140));
 
         this.imagePath = imagePath;
-        this.locationX = x;
-        this.locationY = y;
         this.inventory = new Inventory();
         this.app = app;
 
@@ -51,12 +47,10 @@ public class Bar extends DynamicSpriteEntity implements Collided {
     * @param y The y-coordinate of the bar
     * @param inventory The inventory of the bar
     */
-    public Bar(String imagePath, double x, double y, App app, Inventory inventory) {
-        super(imagePath, new Coordinate2D(x, y), new Size(200, 140));
+    public Bar(String imagePath, Coordinate2D location, App app, Inventory inventory) {
+        super(imagePath, location, new Size(200, 140));
 
         this.imagePath = imagePath;
-        this.locationX = x;
-        this.locationY = y;
         this.inventory = new Inventory();
         this.app = app;
 
@@ -90,24 +84,6 @@ public class Bar extends DynamicSpriteEntity implements Collided {
     */
     public String getImagePath() {
         return imagePath;
-    }
-
-    /*
-    * Get the x-coordinate of the bar
-    *
-    * @return int The x-coordinate of the bar
-    */
-    public double getLocationX() {
-        return locationX;
-    }
-
-    /*
-    * Get the y-coordinate of the bar
-    *
-    * @return int The y-coordinate of the bar
-    */
-    public double getLocationY() {
-        return locationY;
     }
 
     /*

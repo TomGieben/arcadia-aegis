@@ -27,7 +27,6 @@ public class SlotMinigame extends DynamicScene {
     final private String spinSound = "sounds/spin_music.mp3";
     final private App app;
     final private Minigame minigame;
-    private boolean isSpinned = false;
     public SlotMinigame(App app, Minigame minigame) {
         this.app = app;
         this.minigame = minigame;
@@ -70,10 +69,6 @@ public class SlotMinigame extends DynamicScene {
     }
 
     public void spin() {
-        if(this.isSpinned) {
-            return;
-        }
-
         this.playSpinSound();
 
         Random random = new Random();
@@ -88,7 +83,6 @@ public class SlotMinigame extends DynamicScene {
         String item3 = items[randomIndex3];
 
         this.renderItems(randomIndex1, randomIndex2, randomIndex3);
-        this.isSpinned = true;
 
         if (item1.equals(item2) && item2.equals(item3)) {
             this.app.getPlayer().getWallet().deposit(minigame.getPrice());
