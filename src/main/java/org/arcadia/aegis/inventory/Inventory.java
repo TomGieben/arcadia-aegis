@@ -37,9 +37,21 @@ public class Inventory {
     /*
     * Destroy an item in the inventory
     *
-    * @param index The index of the item to destroy
+    * @param The item to destroy
     * @return boolean True if the item was destroyed, false otherwise
     */
+    public boolean destroy(InventoryItem item) {
+        int index = this.items.indexOf(item);
+
+        return this.destroy(index);
+    }
+
+    /*
+     * Destroy an item in the inventory
+     *
+     * @param index The index of the item to destroy
+     * @return boolean True if the item was destroyed, false otherwise
+     */
     public boolean destroy(int index) {
         if (index >= 0 && index < this.items.size()) {
             this.items.remove(index);
