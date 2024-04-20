@@ -9,17 +9,15 @@ import org.arcadia.aegis.game.Drink;
 import org.arcadia.aegis.game.Minigame;
 import org.arcadia.aegis.objects.Bar;
 import org.arcadia.aegis.objects.Player;
-import org.arcadia.aegis.objects.SlotMachine;
 import org.arcadia.aegis.scenes.BarScene;
 import org.arcadia.aegis.scenes.EndScene;
 import org.arcadia.aegis.scenes.GameScene;
 import org.arcadia.aegis.scenes.TitleScene;
 import org.arcadia.aegis.scenes.minigames.HigherLower;
+import org.arcadia.aegis.scenes.minigames.WheelOfFate;
 import org.arcadia.aegis.scenes.minigames.SlotMinigame;
 
-import java.lang.reflect.Array;
 import java.util.ArrayList;
-import java.util.Random;
 
 /**
  * Hello world!
@@ -31,6 +29,9 @@ public class App extends YaegerGame
     private Player player;
     private Bar bar;
     private ArrayList<Minigame> minigames = new ArrayList<Minigame>();
+
+    private Minigame mainPrizeMiniGame;
+
     final private String audioPath = "sounds/background_music.mp3";    public static void main( String[] args )
     {
         launch(args);
@@ -85,6 +86,10 @@ public class App extends YaegerGame
 
         this.minigames.add(higherLower);
         addScene(4, new HigherLower(this, higherLower));
+
+        Minigame mainPrize = new Minigame(this, "MainPrize", 250, "images/wheel_item.png", 6);
+        this.mainPrizeMiniGame = mainPrize;
+        addScene(6, new WheelOfFate(this, mainPrize));
     }
 
     private void renderBar() {
@@ -115,4 +120,6 @@ public class App extends YaegerGame
     public ArrayList<Minigame> getMinigames() {
         return this.minigames;
     }
+
+    public Minigame getMainPrizeMiniGame() { return  this.mainPrizeMiniGame; }
 }

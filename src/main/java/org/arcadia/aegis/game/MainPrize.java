@@ -1,6 +1,8 @@
 package org.arcadia.aegis.game;
 
-public class MainPrize {
+import org.arcadia.aegis.enums.PrizeType;
+
+public class MainPrize extends Prize {
     private String imagePath;
 
     /*
@@ -9,6 +11,7 @@ public class MainPrize {
     * @param imagePath The image path of the main prize
     */
     public MainPrize(String imagePath) {
+        super(PrizeType.MAINPRIZE, "MainPrize");
         this.imagePath = imagePath;
     }
 
