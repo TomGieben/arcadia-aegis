@@ -45,11 +45,10 @@ public class SlotMinigame extends DynamicScene {
 
         addEntity(this.app.getPlayer().getMoneyText());
     }
-
     private void renderTitle() {
         TextEntity title = new TextEntity(
-            new Coordinate2D(getWidth() / 2, 5),
-            this.minigame.getName()
+                new Coordinate2D(getWidth() / 2, 5),
+                this.minigame.getName()
         );
 
         title.setAnchorPoint(AnchorPoint.TOP_CENTER);
@@ -58,6 +57,7 @@ public class SlotMinigame extends DynamicScene {
 
         addEntity(title);
     }
+
 
     private void renderSpinButton() {
         SpinButton button = new SpinButton(this, new Coordinate2D(getWidth() / 2, getHeight() - 5));
@@ -108,6 +108,7 @@ public class SlotMinigame extends DynamicScene {
         addEntity(new Fruit(90, itemsX, images[index1]));
         addEntity(new Fruit(350, itemsX, images[index2]));
         addEntity(new Fruit(620, itemsX, images[index3]));
+
     }
 
     private void playSpinSound() {
