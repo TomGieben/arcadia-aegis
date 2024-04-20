@@ -90,9 +90,9 @@ public class App extends YaegerGame
         this.minigames.add(higherLower);
         addScene(4, new HigherLower(this, higherLower));
 
-        Minigame mainPrize = new Minigame(this, "MainPrize", 250, "images/wheel_item.png", 6);
+        Minigame mainPrize = new Minigame(this, "MainPrize", 250, "images/wheel_item.png", 7);
         this.mainPrizeMiniGame = mainPrize;
-        addScene(6, new WheelOfFate(this, mainPrize));
+        addScene(7, new WheelOfFate(this, mainPrize));
     }
 
     private void renderBar() {

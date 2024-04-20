@@ -1,5 +1,6 @@
 package org.arcadia.aegis.scenes;
 
+import com.github.hanyaeger.api.Coordinate2D;
 import com.github.hanyaeger.api.scenes.DynamicScene;
 import org.arcadia.aegis.entities.buttons.InventoryButton;
 import org.arcadia.aegis.entities.text.MoneyText;
