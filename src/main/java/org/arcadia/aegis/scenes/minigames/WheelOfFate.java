@@ -26,7 +26,7 @@ import java.util.Map;
 import java.util.Random;
 
 public class WheelOfFate extends DynamicScene {
-    final private String backgroundPath = "backgrounds/wheel_background.png";
+    final private String backgroundPath = "backgrounds/spinning_wheel.gif";
     final private String spinSound = "sounds/prize_wheel_spin.wav";
     final private App app;
     final private Minigame minigame;
