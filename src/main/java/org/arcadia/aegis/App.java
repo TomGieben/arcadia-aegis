@@ -47,7 +47,7 @@ public class App extends YaegerGame
         setGameTitle("Arcadia Aegis");
         setSize(new Size(this.width, this.height));
         setBackgroundAudio(this.audioPath);
-        setBackgroundAudioVolume(0.2);
+        setBackgroundAudioVolume(0.1);
         this.renderPlayer();
     }
 
@@ -94,7 +94,14 @@ public class App extends YaegerGame
         this.minigames.add(higherLower);
         addScene(4, new HigherLower(this, higherLower));
 
-        Minigame mainPrize = new Minigame(this, "MainPrize", 250, "images/wheel_item.png", 7);
+        Minigame mainPrize = new Minigame(
+                this,
+                "MainPrize",
+                250,
+                "images/wheel_item.png",
+                7
+        );
+
         this.mainPrizeMiniGame = mainPrize;
         addScene(7, new WheelOfFate(this, mainPrize));
     }
@@ -149,8 +156,12 @@ public class App extends YaegerGame
         }
 
         Coordinate2D locationSlotMachine = new Coordinate2D(x, y);
+        int newSceneIndex = this.slotmachines.size() + 20;
+        SlotMachine slotMachine = new SlotMachine(locationSlotMachine, minigame, this, newSceneIndex);
         this.coordinates.add(locationSlotMachine);
-        this.slotmachines.add(new SlotMachine(locationSlotMachine, minigame, this));
+        this.slotmachines.add(slotMachine);
+
+        addScene(newSceneIndex, new BetScene(slotMachine));
     }
 
     private boolean isCloseToExistingLocation(double x, double y) {

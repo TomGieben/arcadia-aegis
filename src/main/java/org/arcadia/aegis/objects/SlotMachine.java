@@ -17,17 +17,19 @@ public class SlotMachine extends DynamicSpriteEntity implements Collided {
     private float bet;
     private Minigame minigame;
     private App app;
+    private int sceneIndex;
 
     /*
     * Constructor
     *
     * @param minigame The minigame the slot machine is part of
     */
-    public SlotMachine(Coordinate2D locationSlotMachine, Minigame minigame, App app) {
+    public SlotMachine(Coordinate2D locationSlotMachine, Minigame minigame, App app, int sceneIndex) {
         super(minigame.getImagePath(), locationSlotMachine, new Size(60, 70));
 
         this.minigame = minigame;
         this.app = app;
+        this.sceneIndex = sceneIndex;
     }
 
     /*
@@ -60,9 +62,18 @@ public class SlotMachine extends DynamicSpriteEntity implements Collided {
         return bet / price;
     }
 
+    public Minigame getMinigame() {
+        return this.minigame;
+    }
+
+    public void askForBet() {
+        this.app.setActiveScene(this.sceneIndex);
+    }
+
     @Override
     public void onCollision(List<Collider> list) {
         this.app.getPlayer().setSpeed(0);
-        this.minigame.start();
+
+        this.askForBet();
     }
 }

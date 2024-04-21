@@ -10,6 +10,7 @@ public class Minigame  {
     private float price;
     private String imagePath;
     private int sceneIndex;
+    private int betSceneIndex;
     private ArrayList<Prize> prizes;
 
     /*
