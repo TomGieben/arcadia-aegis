@@ -28,16 +28,29 @@ public class HigherLower extends DynamicScene {
     final private Minigame minigame;
     private HigherLowerText higherLowerText;
     private int currentNumber;
+
+    /*
+     * Constructor
+     *
+     * @param app The app
+     * @param minigame The minigame
+     */
     public HigherLower(App app, Minigame minigame){
         this.app = app;
         this.minigame = minigame;
         this.currentNumber = 0;
     }
 
+    /*
+     * Setup the scene
+     */
     @Override
     public void setupScene() {
     }
 
+    /*
+     * Setup the entities
+     */
     @Override
     public void setupEntities() {
         this.renderText();
@@ -47,6 +60,11 @@ public class HigherLower extends DynamicScene {
         addEntity(this.app.getPlayer().getMoneyText());
     }
 
+    /*
+     * Handle the key pressed event
+     *
+     * @param keyCode The key that was pressed
+     */
     private void renderText() {
         double defaultWidth = getWidth() / 2;
         double defaultHeight = getHeight() / 2;
@@ -59,11 +77,20 @@ public class HigherLower extends DynamicScene {
         this.renderReturnButton();
     }
 
+    /*
+     * Render the return button
+     */
     private void renderReturnButton() {
         ReturnButton returnButton = new ReturnButton(this.app, new Coordinate2D(getWidth() - 120, getHeight() - 40), 1);
         addEntity(returnButton);
     }
 
+    /*
+     * Render the higher and lower buttons
+     *
+     * @param defaultWidth The default width
+     * @param defaultHeight The default height
+     */
     private void renderHigerLowerButtons(double defaultWidth, double defaultHeight) {
         HigherButton higherButton = new HigherButton(
                 this.app,
@@ -84,6 +111,11 @@ public class HigherLower extends DynamicScene {
         addEntity(lowerButton);
     }
 
+    /*
+     * Run the game
+     *
+     * @param higher If the player guessed higher
+     */
     public void runGame(boolean higher) {
         int randomNumber = generateRandomNumber();
 
@@ -109,10 +141,21 @@ public class HigherLower extends DynamicScene {
         this.higherLowerText.setHigherLowerText("Current number: " + this.currentNumber);
     }
 
+    /*
+     * Generate a random number
+     *
+     * @return The random number
+     */
     private int generateRandomNumber() {
         Random random = new Random();
         return random.nextInt(100) + 1; // Random number between 1 and 100
     }
+
+    /*
+     * Get the minigame
+     *
+     * @return Minigame The minigame
+     */
     public Minigame getMinigame() {
         return this.minigame;
     }

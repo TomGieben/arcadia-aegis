@@ -23,15 +23,28 @@ public class BarScene extends DynamicScene {
     final private String title = "The bar";
     final private App app;
     final private Bar bar;
+
+    /*
+     * Constructor
+     *
+     * @param app The app
+     */
     public BarScene(App app) {
         this.app = app;
         this.bar = app.getBar();
     }
+
+    /*
+     * Setup the scene
+     */
     @Override
     public void setupScene() {
         setBackgroundImage(this.backgroundPath);
     }
 
+    /*
+     * Setup the entities
+     */
     @Override
     public void setupEntities() {
         this.renderTitle();
@@ -40,6 +53,9 @@ public class BarScene extends DynamicScene {
         this.renderDrinks();
     }
 
+    /*
+     * Render the drinks
+     */
     private void renderDrinks() {
         Inventory inventory = this.bar.getInventory();
         ArrayList<InventoryItem> items = inventory.all();
@@ -56,6 +72,12 @@ public class BarScene extends DynamicScene {
         }
     }
 
+    /*
+     * Render the buy button
+     *
+     * @param drink The drink
+     * @param counter The counter
+     */
     private void renderBuyButton(Drink drink, int counter) {
         int padding = 60;
         double baseX = padding + (counter * 100);
@@ -80,6 +102,9 @@ public class BarScene extends DynamicScene {
         addEntity(price);
     }
 
+    /*
+     * Render the title
+     */
     private void renderTitle() {
         TextEntity title = new TextEntity(
             new Coordinate2D(getWidth() / 2, 5),
@@ -93,6 +118,9 @@ public class BarScene extends DynamicScene {
         addEntity(title);
     }
 
+    /*
+    * Render the return button
+    */
     private void renderReturnButton() {
         ReturnButton returnButton = new ReturnButton(this.app, new Coordinate2D(getWidth() - 120, getHeight() - 40), 1);
         addEntity(returnButton);

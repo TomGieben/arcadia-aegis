@@ -85,11 +85,10 @@ public class Minigame  {
         return this.prizes.get(index);
     }
 
+    /*
+    * Start the minigame
+    */
     public void start() {
         this.app.setActiveScene(this.sceneIndex);
-    }
-
-    public void end() {
-        // End the minigame
     }
 }

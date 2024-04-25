@@ -111,6 +111,11 @@ public class Player extends DynamicSpriteEntity implements Collider, KeyListener
         return influence;
     }
 
+    /*
+     * Get the name of the player
+     *
+     * @return String The name of the player
+     */
     @Override
     public void onPressedKeysChange(Set<KeyCode> pressedKeys) {
         if (pressedKeys.contains(KeyCode.W) && pressedKeys.contains(KeyCode.D) || pressedKeys.contains(KeyCode.UP) && pressedKeys.contains(KeyCode.RIGHT)) {
@@ -134,6 +139,11 @@ public class Player extends DynamicSpriteEntity implements Collider, KeyListener
         }
     }
 
+    /*
+     * Get the name of the player
+     *
+     * @return String The name of the player
+     */
     @Override
     public void notifyBoundaryTouching(SceneBorder sceneBorder) {
         setSpeed(0);

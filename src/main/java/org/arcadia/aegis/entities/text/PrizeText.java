@@ -7,7 +7,11 @@ import javafx.scene.text.Font;
 import javafx.scene.text.FontWeight;
 
 public class PrizeText  extends TextEntity {
-
+    /*
+     * Constructor
+     *
+     * @param location The location of the text
+     */
     public PrizeText(Coordinate2D location) {
         super(location);
 
@@ -15,6 +19,11 @@ public class PrizeText  extends TextEntity {
         setFill(Color.GREENYELLOW);
     }
 
+    /*
+     * Set the text of the PrizeText
+     *
+     * @param text The text to set
+     */
     public void setPrizeText(String text){
         setText(text);
     }

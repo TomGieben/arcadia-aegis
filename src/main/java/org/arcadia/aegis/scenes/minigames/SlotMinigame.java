@@ -27,15 +27,29 @@ public class SlotMinigame extends DynamicScene {
     final private String spinSound = "sounds/spin_music.mp3";
     final private App app;
     final private Minigame minigame;
+
+    /*
+     * Constructor
+     *
+     * @param app The app
+     * @param minigame The minigame
+     */
     public SlotMinigame(App app, Minigame minigame) {
         this.app = app;
         this.minigame = minigame;
     }
+
+    /*
+     * Setup the scene
+     */
     @Override
     public void setupScene() {
         setBackgroundImage(this.backgroundPath);
     }
 
+    /*
+     * Setup the entities
+     */
     @Override
     public void setupEntities() {
         this.renderTitle();
@@ -44,6 +58,10 @@ public class SlotMinigame extends DynamicScene {
 
         addEntity(this.app.getPlayer().getMoneyText());
     }
+
+    /*
+     * Render the title
+     */
     private void renderTitle() {
         TextEntity title = new TextEntity(
                 new Coordinate2D(getWidth() / 2, 5),
@@ -57,7 +75,9 @@ public class SlotMinigame extends DynamicScene {
         addEntity(title);
     }
 
-
+    /*
+     * Render the spin button
+     */
     private void renderSpinButton() {
         SpinButton button = new SpinButton(this, new Coordinate2D(getWidth() / 2, getHeight() - 5));
 
@@ -68,6 +88,9 @@ public class SlotMinigame extends DynamicScene {
         addEntity(button);
     }
 
+    /*
+     * Spin the slot machine
+     */
     public void spin() {
         this.playSpinSound();
 
@@ -95,6 +118,13 @@ public class SlotMinigame extends DynamicScene {
         this.app.getPlayer().getMoneyText().setMoneyText(this.app.getPlayer().getWallet().getAmount());
     }
 
+    /*
+     * Render the items
+     *
+     * @param index1 The index of the first item
+     * @param index2 The index of the second item
+     * @param index3 The index of the third item
+     */
     private void renderItems(int index1, int index2, int index3) {
         String[] images = this.getItems();
         int itemsX = 250;
@@ -105,6 +135,9 @@ public class SlotMinigame extends DynamicScene {
 
     }
 
+    /*
+     * Play the spin sound
+     */
     private void playSpinSound() {
         SoundClip sound = new SoundClip(this.spinSound);
         sound.setVolume(0.5);
@@ -112,6 +145,11 @@ public class SlotMinigame extends DynamicScene {
         sound.play();
     }
 
+    /*
+     * Get the items
+     *
+     * @return String[] The items
+     */
     private String[] getItems() {
         String basePath = "images/fruits/";
         return new String[] {
@@ -127,6 +165,9 @@ public class SlotMinigame extends DynamicScene {
         };
     }
 
+    /*
+     * Render the return button
+     */
     private void renderReturnButton() {
         ReturnButton returnButton = new ReturnButton(this.app, new Coordinate2D(getWidth() - 120, getHeight() - 40), 1);
         addEntity(returnButton);

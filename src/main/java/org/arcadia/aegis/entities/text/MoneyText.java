@@ -8,7 +8,11 @@ import javafx.scene.text.FontWeight;
 import org.arcadia.aegis.App;
 
 public class MoneyText extends TextEntity {
-
+    /*
+     * Constructor
+     *
+     * @param location The location of the text
+     */
     public MoneyText(Coordinate2D location) {
         super(location);
 
@@ -16,6 +20,11 @@ public class MoneyText extends TextEntity {
         setFill(Color.GOLD);
     }
 
+    /*
+     * Set the text of the MoneyText
+     *
+     * @param money The money to set
+     */
     public void setMoneyText(float money){
         setText("Money: " + money);
     }

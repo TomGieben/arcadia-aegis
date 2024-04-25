@@ -12,6 +12,13 @@ import org.arcadia.aegis.scenes.minigames.WheelOfFate;
 
 public class TurnWheelButton extends TextEntity implements MouseButtonPressedListener {
     final private WheelOfFate wheelOfFate;
+
+    /*
+     * Constructor
+     *
+     * @param wheelOfFate The wheel of fate
+     * @param initialLocation The initial location of the button
+     */
     public TurnWheelButton(WheelOfFate wheelOfFate, Coordinate2D initialLocation) {
         super(initialLocation, "Spin");
         setFill(Color.WHITESMOKE);
@@ -20,6 +27,13 @@ public class TurnWheelButton extends TextEntity implements MouseButtonPressedLis
         this.wheelOfFate = wheelOfFate;
     }
 
+
+    /*
+     * Handle the mouse button pressed event
+     *
+     * @param button The button that was pressed
+     * @param coordinate2D The coordinate of the button press
+     */
     @Override
     public void onMouseButtonPressed(MouseButton button, Coordinate2D coordinate2D){
         if(this.wheelOfFate.getApp().getPlayer().getWallet().getAmount() >= this.wheelOfFate.getMinigame().getPrice()) {

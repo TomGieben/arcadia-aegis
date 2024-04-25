@@ -21,6 +21,13 @@ public class UseButton extends TextEntity implements MouseButtonPressedListener 
     final private App app;
     final private String soundPath = "sounds/success.wav";
 
+    /*
+     * Constructor
+     *
+     * @param item The item to use
+     * @param app The app
+     * @param initialLocation The initial location of the button
+     */
     public UseButton(InventoryItem item, App app, Coordinate2D initialLocation) {
         super(initialLocation, "Use");
         setFill(Color.GOLD);
@@ -30,6 +37,12 @@ public class UseButton extends TextEntity implements MouseButtonPressedListener 
         this.app = app;
     }
 
+    /*
+     * Handle the mouse button pressed event
+     *
+     * @param button The button that was pressed
+     * @param coordinate2D The coordinate of the button press
+     */
     @Override
     public void onMouseButtonPressed(MouseButton button, Coordinate2D coordinate2D){
         Player player = this.app.getPlayer();

@@ -13,6 +13,13 @@ public class InventoryButton extends TextEntity implements MouseButtonPressedLis
     final private App app;
     private int sceneId;
 
+    /*
+    * Constructor
+    *
+    * @param app The app
+    * @param initialLocation The initial location of the button
+    * @param sceneId The scene id
+    */
     public InventoryButton(App app, Coordinate2D initialLocation, int sceneId) {
         super(initialLocation, "Inventory");
         setFill(Color.BLACK);
@@ -22,6 +29,12 @@ public class InventoryButton extends TextEntity implements MouseButtonPressedLis
         this.sceneId = sceneId;
     }
 
+    /*
+    * Handle the mouse button pressed event
+    *
+    * @param button The button that was pressed
+    * @param coordinate2D The coordinate of the button press
+    */
     @Override
     public void onMouseButtonPressed(MouseButton button, Coordinate2D coordinate2D){
         app.setActiveScene(this.sceneId);

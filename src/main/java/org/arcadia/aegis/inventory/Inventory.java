@@ -20,6 +20,11 @@ public class Inventory {
         this.items = items;
     }
 
+    /*
+    * Get all items in the inventory
+    *
+    * @return ArrayList<InventoryItem> All items in the inventory
+    */
     public ArrayList<InventoryItem> all() {
         return this.items;
     }

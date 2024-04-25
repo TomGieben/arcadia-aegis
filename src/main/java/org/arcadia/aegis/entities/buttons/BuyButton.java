@@ -19,6 +19,13 @@ public class BuyButton extends TextEntity implements MouseButtonPressedListener 
     final private App app;
     final private String soundPath = "sounds/item_purchase.wav";
 
+    /*
+    * Constructor
+    *
+    * @param drink The drink to buy
+    * @param app The app
+    * @param initialLocation The initial location of the button
+    */
     public BuyButton(Drink drink, App app, Coordinate2D initialLocation) {
         super(initialLocation, drink.getName());
         setFill(Color.GOLD);
@@ -28,6 +35,12 @@ public class BuyButton extends TextEntity implements MouseButtonPressedListener 
         this.app = app;
     }
 
+    /*
+    * Handle the mouse button pressed event
+    *
+    * @param button The button that was pressed
+    * @param coordinate2D The coordinate of the button press
+    */
     @Override
     public void onMouseButtonPressed(MouseButton button, Coordinate2D coordinate2D){
         Player player = this.app.getPlayer();
@@ -44,6 +57,9 @@ public class BuyButton extends TextEntity implements MouseButtonPressedListener 
         wallet.withdraw(drinkPrice);
     }
 
+    /*
+    * Play the purchase sound
+    */
     private void playSound() {
         SoundClip sound = new SoundClip(this.soundPath);
         sound.setVolume(0.5);

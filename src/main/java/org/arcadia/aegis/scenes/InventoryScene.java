@@ -27,15 +27,28 @@ public class InventoryScene extends DynamicScene {
     final private String title = "Inventory";
     final private App app;
     final private Inventory inventory;
+    
+    /*
+     * Constructor
+     *
+     * @param app The app
+     */
     public InventoryScene(App app) {
         this.app = app;
         this.inventory = app.getPlayer().getInventory();
     }
+
+    /*
+     * Setup the scene
+     */
     @Override
     public void setupScene() {
         setBackgroundImage(this.backgroundPath);
     }
 
+    /*
+     * Setup the entities
+     */
     @Override
     public void setupEntities() {
         this.renderTitle();
@@ -44,6 +57,9 @@ public class InventoryScene extends DynamicScene {
         this.renderItems();
     }
 
+    /*
+     * Render the drinks
+     */
     private void renderItems() {
         ArrayList<InventoryItem> items = this.inventory.all();
         int counter = 0;
@@ -55,6 +71,12 @@ public class InventoryScene extends DynamicScene {
         }
     }
 
+    /*
+     * Render the buy button
+     *
+     * @param drink The drink
+     * @param counter The counter
+     */
     private void renderUseButton(InventoryItem item, int counter) {
         int padding = 60;
         double baseX = padding + (counter * 100);
@@ -87,6 +109,9 @@ public class InventoryScene extends DynamicScene {
         addEntity(inventoryItemEntity);
     }
 
+    /*
+     * Render the title
+     */
     private void renderTitle() {
         TextEntity title = new TextEntity(
             new Coordinate2D(getWidth() / 2, 5),
@@ -100,6 +125,9 @@ public class InventoryScene extends DynamicScene {
         addEntity(title);
     }
 
+    /*
+     * Render the return button
+     */
     private void renderReturnButton() {
         ReturnButton returnButton = new ReturnButton(this.app, new Coordinate2D(getWidth() - 120, getHeight() - 40), 1);
         addEntity(returnButton);

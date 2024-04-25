@@ -8,6 +8,11 @@ import javafx.scene.text.FontWeight;
 
 public class HigherLowerText extends TextEntity {
 
+    /*
+     * Constructor
+     *
+     * @param location The location of the text
+     */
     public HigherLowerText(Coordinate2D location) {
         super(location);
 
@@ -15,6 +20,11 @@ public class HigherLowerText extends TextEntity {
         setFill(Color.RED);
     }
 
+    /*
+     * Set the text of the HigherLowerText
+     *
+     * @param text The text to set
+     */
     public void setHigherLowerText(String text){
         setText(text);
     }

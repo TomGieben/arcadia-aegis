@@ -9,15 +9,26 @@ public class GameScene extends DynamicScene {
     final private App app;
     final private String backgroundPath = "backgrounds/carpet_casino.png";
 
+    /*
+     * Constructor
+     *
+     * @param app The app
+     */
     public GameScene(App app){
         this.app = app;
     }
 
+    /*
+     * Setup the scene
+     */
     @Override
     public void setupScene() {
         setBackgroundImage(this.backgroundPath);
     }
 
+    /*
+     * Setup the entities
+     */
     @Override
     public void setupEntities() {
         this.loadSlotMachines();
@@ -26,6 +37,9 @@ public class GameScene extends DynamicScene {
         this.renderInventoryButton();
     }
 
+    /*
+     * Render the inventory button
+     */
     private void renderInventoryButton() {
         InventoryButton inventoryButton = new InventoryButton(
                 this.app,
@@ -36,16 +50,25 @@ public class GameScene extends DynamicScene {
         addEntity(inventoryButton);
     }
 
+    /*
+     * Render the player
+     */
     private void renderPlayer() {
         addEntity(this.app.getPlayer());
         this.app.getPlayer().getMoneyText().setMoneyText(this.app.getPlayer().getWallet().getAmount());
         addEntity(this.app.getPlayer().getMoneyText());
     }
 
+    /*
+     * Load the slot machines
+     */
     private void loadSlotMachines() {
         this.app.getSlotMachines().forEach(this::addEntity);
     }
 
+    /*
+     * Render the bar
+     */
     private void renderBar() {
         addEntity(this.app.getBar());
     }

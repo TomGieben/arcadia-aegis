@@ -62,14 +62,29 @@ public class SlotMachine extends DynamicSpriteEntity implements Collided {
         return bet / price;
     }
 
+    /*
+    * Get the minigame of the slot machine
+    *
+    * @return Minigame The minigame of the slot machine
+    */
     public Minigame getMinigame() {
         return this.minigame;
     }
 
+    /*
+    * Get the app of the slot machine
+    *
+    * @return App The app of the slot machine
+    */
     public void askForBet() {
         this.app.setActiveScene(this.sceneIndex);
     }
 
+    /*
+    * Get the app of the slot machine
+    *
+    * @return App The app of the slot machine
+    */
     @Override
     public void onCollision(List<Collider> list) {
         this.app.getPlayer().setSpeed(0);
