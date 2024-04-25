@@ -3,6 +3,7 @@ package org.arcadia.aegis.scenes.minigames;
 import com.github.hanyaeger.api.AnchorPoint;
 import com.github.hanyaeger.api.Coordinate2D;
 import com.github.hanyaeger.api.entities.impl.TextEntity;
+import com.github.hanyaeger.api.media.SoundClip;
 import com.github.hanyaeger.api.scenes.DynamicScene;
 import javafx.scene.input.KeyCode;
 import javafx.scene.paint.Color;
@@ -24,6 +25,9 @@ import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 public class HigherLower extends DynamicScene {
+
+    final private String wonSound = "sounds/win_sound.wav";
+    final private String lostSound = "sounds/lost_sound.wav";
     final private App app;
     final private Minigame minigame;
     private HigherLowerText higherLowerText;
@@ -139,14 +143,28 @@ public class HigherLower extends DynamicScene {
         float costAmount = minigame.getPrice() * minigame.getSlotmachine().getMultiplier();
 
         if (won) {
+            this.playSound(this.wonSound);
             this.app.getPlayer().getWallet().deposit(costAmount);
         } else {
+            this.playSound(this.lostSound);
             this.app.getPlayer().getWallet().withdraw(costAmount);
         }
 
         this.app.getMoneyText().setMoneyText(this.app.getPlayer().getWallet().getAmount());
         this.currentNumber = this.generateRandomNumber();
         this.higherLowerText.setHigherLowerText("Current number: " + this.currentNumber);
+    }
+
+    /*
+     * Plays a chosen sound
+     *
+     * @param soundPath the path of the sound
+     */
+    private void playSound(String soundPath) {
+        SoundClip sound = new SoundClip(soundPath);
+        sound.setVolume(0.5);
+
+        sound.play();
     }
 
     /*
