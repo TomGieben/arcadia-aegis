@@ -14,6 +14,7 @@ public class DrinkEnitity extends DynamicSpriteEntity {
      * @param imagePath The image path of the fruit
      */
     public DrinkEnitity(double x, double y, String imagePath) {
+        //Width and height of the drink = 100
         super(imagePath, new Coordinate2D(x, y), new Size(100, 100));
     }
 }

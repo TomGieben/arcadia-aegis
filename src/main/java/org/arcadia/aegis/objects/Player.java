@@ -22,7 +22,6 @@ public class Player extends DynamicSpriteEntity implements Collider, KeyListener
     private Inventory inventory;
     private float influence;
     private String playerName;
-    final private float defaultMoney = 100;
     /*
     * Constructor
     *
@@ -32,10 +31,8 @@ public class Player extends DynamicSpriteEntity implements Collider, KeyListener
     * @param inventory The inventory of the player
     */
     public Player(Coordinate2D location, String playerName) {
-        super("sprites/player.png", location, new Size(50, 60));
-        this.wallet = new Wallet(this.defaultMoney);
-        this.playerName = playerName;
-        this.inventory = new Inventory();
+        //The amount a player starts with is set to 200 default
+        this(location, playerName, new Wallet(200), new Inventory());
     }
 
     /*
@@ -47,7 +44,8 @@ public class Player extends DynamicSpriteEntity implements Collider, KeyListener
     * @param inventory The inventory of the player
     */
     public Player(Coordinate2D location, String playerName, Wallet wallet, Inventory inventory) {
-        super("sprites/idle.png", location, new Size(50,60));
+        //The player width = 50 and the player height = 60
+        super("sprites/player.png", location, new Size(50,60));
         this.wallet = wallet;
         this.playerName = playerName;
         this.inventory = inventory;
@@ -107,6 +105,10 @@ public class Player extends DynamicSpriteEntity implements Collider, KeyListener
      *
      * @return String The name of the player
      */
+    public String getPlayerName() {
+        return this.playerName;
+    }
+
     @Override
     public void onPressedKeysChange(Set<KeyCode> pressedKeys) {
         if (pressedKeys.contains(KeyCode.W) && pressedKeys.contains(KeyCode.D) || pressedKeys.contains(KeyCode.UP) && pressedKeys.contains(KeyCode.RIGHT)) {
@@ -130,11 +132,6 @@ public class Player extends DynamicSpriteEntity implements Collider, KeyListener
         }
     }
 
-    /*
-     * Get the name of the player
-     *
-     * @return String The name of the player
-     */
     @Override
     public void notifyBoundaryTouching(SceneBorder sceneBorder) {
         setSpeed(0);

@@ -17,7 +17,6 @@ import java.util.Optional;
 
 public class Bar extends DynamicSpriteEntity implements Collided {
     private Inventory inventory;
-    private String imagePath;
     private App app;
     private int sceneIndex = 5;
 
@@ -25,34 +24,27 @@ public class Bar extends DynamicSpriteEntity implements Collided {
     * Constructor
     *
     * @param imagePath The path to the image of the bar
-    * @param x The x-coordinate of the bar
-    * @param y The y-coordinate of the bar
-     * @param inventory The inventory of the bar
+     * @param location The location of the bar
+     * @param app The app of the bar
     */
     public Bar(String imagePath, Coordinate2D location, App app) {
-        super(imagePath, location, new Size(200, 140));
-
-        this.imagePath = imagePath;
-        this.inventory = new Inventory();
-        this.app = app;
-
-        this.initDrinks();
+        this(imagePath, location, app, new Inventory());
     }
 
     /*
     * Constructor
     *
     * @param imagePath The path to the image of the bar
-    * @param x The x-coordinate of the bar
-    * @param y The y-coordinate of the bar
+    * @param location The location of the bar
+    * @param app The app of the bar
     * @param inventory The inventory of the bar
     */
     public Bar(String imagePath, Coordinate2D location, App app, Inventory inventory) {
+        //Width of the bar = 200 and height of the bar = 140
         super(imagePath, location, new Size(200, 140));
 
-        this.imagePath = imagePath;
-        this.inventory = new Inventory();
         this.app = app;
+        this.inventory = inventory;
 
         this.initDrinks();
     }
@@ -80,15 +72,6 @@ public class Bar extends DynamicSpriteEntity implements Collided {
     */
     public Inventory getInventory() {
         return inventory;
-    }
-
-    /*
-    * Get the path to the image of the bar
-    *
-    * @return String The path to the image of the bar
-    */
-    public String getImagePath() {
-        return imagePath;
     }
 
     /*

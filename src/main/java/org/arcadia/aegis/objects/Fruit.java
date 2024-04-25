@@ -15,6 +15,7 @@ public class Fruit extends DynamicSpriteEntity {
      * @param imagePath The image path of the fruit
      */
     public Fruit(double x, double y, String imagePath) {
+        //Width and height of the fruit = 100
         super(imagePath, new Coordinate2D(x, y), new Size(100, 100));
     }
 }
