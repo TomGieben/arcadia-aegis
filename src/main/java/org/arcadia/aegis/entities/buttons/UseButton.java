@@ -54,8 +54,6 @@ public class UseButton extends TextEntity implements MouseButtonPressedListener 
 
         player.getInventory().destroy(this.item);
 
-        //TODO make the drink have influence on a minigame
-
         this.playSound();
 
         this.app.setActiveScene(6);
