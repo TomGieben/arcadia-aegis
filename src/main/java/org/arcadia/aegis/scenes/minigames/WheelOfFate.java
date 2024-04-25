@@ -2,7 +2,6 @@ package org.arcadia.aegis.scenes.minigames;
 
 import com.github.hanyaeger.api.AnchorPoint;
 import com.github.hanyaeger.api.Coordinate2D;
-import com.github.hanyaeger.api.entities.impl.TextEntity;
 import com.github.hanyaeger.api.media.SoundClip;
 import com.github.hanyaeger.api.scenes.DynamicScene;
 import javafx.scene.paint.Color;
@@ -11,7 +10,6 @@ import javafx.scene.text.FontWeight;
 import org.arcadia.aegis.App;
 import org.arcadia.aegis.entities.buttons.ReturnButton;
 import org.arcadia.aegis.entities.buttons.TurnWheelButton;
-import org.arcadia.aegis.entities.text.MoneyText;
 import org.arcadia.aegis.entities.text.PrizeText;
 import org.arcadia.aegis.enums.PrizeType;
 import org.arcadia.aegis.game.Drink;
@@ -51,7 +49,7 @@ public class WheelOfFate extends DynamicScene {
         this.renderSpinButton();
         this.renderReturnButton();
 
-        addEntity(this.app.getPlayer().getMoneyText());
+        addEntity(this.app.getMoneyText());
 
         PrizeText prizeText = new PrizeText(new Coordinate2D(5, 50));
         addEntity(prizeText);
@@ -92,7 +90,7 @@ public class WheelOfFate extends DynamicScene {
 
         if (PrizeType.MONEY == prize.getType()) {
             this.app.getPlayer().getWallet().deposit(Integer.parseInt(prize.getValue()));
-            this.app.getPlayer().getMoneyText().setMoneyText(this.app.getPlayer().getWallet().getAmount());
+            this.app.getMoneyText().setMoneyText(this.app.getPlayer().getWallet().getAmount());
             this.prizeText.setPrizeText("You have gained: " + prize.getValue() + " Bucks");
         } else if (PrizeType.DRINK == prize.getType() || PrizeType.MAINPRIZE == prize.getType()) {
             InventoryItem inventoryItem = prize;

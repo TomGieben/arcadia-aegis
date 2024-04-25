@@ -17,6 +17,7 @@ import org.arcadia.aegis.entities.text.HigherLowerText;
 import org.arcadia.aegis.entities.text.MoneyText;
 import org.arcadia.aegis.game.Minigame;
 import org.arcadia.aegis.objects.Player;
+import org.arcadia.aegis.objects.SlotMachine;
 
 import java.util.Random;
 import java.util.Set;
@@ -28,7 +29,7 @@ public class HigherLower extends DynamicScene {
     final private Minigame minigame;
     private HigherLowerText higherLowerText;
     private int currentNumber;
-    public HigherLower(App app, Minigame minigame){
+    public HigherLower(App app, Minigame minigame) {
         this.app = app;
         this.minigame = minigame;
         this.currentNumber = 0;
@@ -44,7 +45,7 @@ public class HigherLower extends DynamicScene {
 
         currentNumber = generateRandomNumber();
         this.higherLowerText.setHigherLowerText("Current number: " + currentNumber);
-        addEntity(this.app.getPlayer().getMoneyText());
+        addEntity(this.app.getMoneyText());
     }
 
     private void renderText() {
@@ -104,7 +105,7 @@ public class HigherLower extends DynamicScene {
             this.app.getPlayer().getWallet().withdraw(minigame.getPrice());
         }
 
-        this.app.getPlayer().getMoneyText().setMoneyText(this.app.getPlayer().getWallet().getAmount());
+        this.app.getMoneyText().setMoneyText(this.app.getPlayer().getWallet().getAmount());
         this.currentNumber = this.generateRandomNumber();
         this.higherLowerText.setHigherLowerText("Current number: " + this.currentNumber);
     }

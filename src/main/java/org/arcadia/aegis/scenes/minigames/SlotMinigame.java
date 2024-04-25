@@ -42,7 +42,7 @@ public class SlotMinigame extends DynamicScene {
         this.renderSpinButton();
         this.renderReturnButton();
 
-        addEntity(this.app.getPlayer().getMoneyText());
+        addEntity(this.app.getMoneyText());
     }
     private void renderTitle() {
         TextEntity title = new TextEntity(
@@ -92,7 +92,7 @@ public class SlotMinigame extends DynamicScene {
             this.app.getPlayer().getWallet().withdraw(minigame.getPrice());
         }
 
-        this.app.getPlayer().getMoneyText().setMoneyText(this.app.getPlayer().getWallet().getAmount());
+        this.app.getMoneyText().setMoneyText(this.app.getPlayer().getWallet().getAmount());
     }
 
     private void renderItems(int index1, int index2, int index3) {

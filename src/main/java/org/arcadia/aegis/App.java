@@ -36,6 +36,7 @@ public class App extends YaegerGame
     final private int padding = 100;
     private int width = 800;
     private int height = 600;
+    private MoneyText moneyText;
 
     final private String audioPath = "sounds/background_music.mp3";    public static void main( String[] args )
     {
@@ -121,9 +122,11 @@ public class App extends YaegerGame
 
     private void renderPlayer() {
         MoneyText moneyText = new MoneyText(new Coordinate2D(1, 5));
+        this.moneyText = moneyText;
+
         Coordinate2D locationPlayer = new Coordinate2D(400, 300);
         this.coordinates.add(locationPlayer);
-        this.player = new Player(locationPlayer, moneyText, this.getPlayerName());
+        this.player = new Player(locationPlayer, this.getPlayerName());
     }
 
     private void renderSlotMachines() {
@@ -192,4 +195,8 @@ public class App extends YaegerGame
     public Minigame getMainPrizeMiniGame() { return  this.mainPrizeMiniGame; }
 
     public ArrayList<SlotMachine> getSlotMachines() { return this.slotmachines; }
+
+    public MoneyText getMoneyText() {
+        return this.moneyText;
+    }
 }

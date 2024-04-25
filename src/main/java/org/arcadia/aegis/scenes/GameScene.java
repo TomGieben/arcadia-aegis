@@ -22,8 +22,8 @@ public class GameScene extends DynamicScene {
     public void setupEntities() {
         this.loadSlotMachines();
         this.renderBar();
-        this.renderPlayer();
         this.renderInventoryButton();
+        this.renderPlayer();
     }
 
     private void renderInventoryButton() {
@@ -38,8 +38,8 @@ public class GameScene extends DynamicScene {
 
     private void renderPlayer() {
         addEntity(this.app.getPlayer());
-        this.app.getPlayer().getMoneyText().setMoneyText(this.app.getPlayer().getWallet().getAmount());
-        addEntity(this.app.getPlayer().getMoneyText());
+        this.app.getMoneyText().setMoneyText(this.app.getPlayer().getWallet().getAmount());
+        addEntity(this.app.getMoneyText());
     }
 
     private void loadSlotMachines() {
