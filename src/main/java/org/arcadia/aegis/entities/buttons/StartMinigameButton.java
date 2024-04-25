@@ -8,6 +8,7 @@ import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
 import javafx.scene.text.FontWeight;
 import org.arcadia.aegis.App;
+import org.arcadia.aegis.game.Minigame;
 import org.arcadia.aegis.objects.SlotMachine;
 
 public class StartMinigameButton extends TextEntity implements MouseButtonPressedListener {
@@ -35,6 +36,8 @@ public class StartMinigameButton extends TextEntity implements MouseButtonPresse
      */
     @Override
     public void onMouseButtonPressed(MouseButton button, Coordinate2D coordinate2D){
-        slotMachine.getMinigame().start();
+        Minigame minigame = slotMachine.getMinigame();
+
+        minigame.start(slotMachine);
     }
 }

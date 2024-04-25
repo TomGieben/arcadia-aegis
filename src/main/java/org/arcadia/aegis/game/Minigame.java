@@ -1,6 +1,7 @@
 package org.arcadia.aegis.game;
 
 import org.arcadia.aegis.App;
+import org.arcadia.aegis.objects.SlotMachine;
 
 import java.util.ArrayList;
 
@@ -10,7 +11,7 @@ public class Minigame  {
     private float price;
     private String imagePath;
     private int sceneIndex;
-    private int betSceneIndex;
+    private SlotMachine slotMachine;
     private ArrayList<Prize> prizes;
 
     /*
@@ -29,13 +30,21 @@ public class Minigame  {
     }
 
     /*
-    * Set the prizes of the minigame
+    * Get the prizes of the minigame
     *
-    * @param prizes The prizes of the minigame
-    * @return void
+    * @return price
     */
     public float getPrice() {
         return this.price;
+    }
+
+    /*
+     * Set the slotmachine of the minigame
+     *
+     * @return slotmachine
+     */
+    public SlotMachine getSlotmachine() {
+        return this.slotMachine;
     }
 
     /*
@@ -88,7 +97,8 @@ public class Minigame  {
     /*
     * Start the minigame
     */
-    public void start() {
+    public void start(SlotMachine slotMachine) {
+        this.slotMachine = slotMachine;
         this.app.setActiveScene(this.sceneIndex);
         this.app.getMoneyText().setMoneyText(this.app.getPlayer().getWallet().getAmount());
     }
