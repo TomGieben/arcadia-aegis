@@ -204,7 +204,7 @@ public class App extends YaegerGame
         this.coordinates.add(locationSlotMachine);
         this.slotmachines.add(slotMachine);
 
-        addScene(newSceneIndex, new BetScene(slotMachine));
+        addScene(newSceneIndex, new BetScene(slotMachine, this));
     }
 
     /**

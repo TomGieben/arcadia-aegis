@@ -100,5 +100,6 @@ public class Minigame  {
     public void start(SlotMachine slotMachine) {
         this.slotMachine = slotMachine;
         this.app.setActiveScene(this.sceneIndex);
+        this.app.getMoneyText().setMoneyText(this.app.getPlayer().getWallet().getAmount());
     }
 }

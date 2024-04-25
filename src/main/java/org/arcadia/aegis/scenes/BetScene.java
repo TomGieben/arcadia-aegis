@@ -24,14 +24,16 @@ public class BetScene extends DynamicScene implements KeyListener {
     private boolean prevWasEmpty = true;
     final private SlotMachine slotMachine;
     private TextEntity betText;
+    final private App app;
 
     /*
      * Constructor
      *
      * @param slotMachine The slot machine
      */
-    public BetScene(SlotMachine slotMachine){
+    public BetScene(SlotMachine slotMachine, App app){
         this.slotMachine = slotMachine;
+        this.app = app;
     }
 
     /*
@@ -51,6 +53,8 @@ public class BetScene extends DynamicScene implements KeyListener {
         this.renderTitle();
         this.renderBetInput();
         this.renderBetAmount();
+
+        addEntity(this.app.getMoneyText());
     }
 
     /*

@@ -79,6 +79,7 @@ public class SlotMachine extends DynamicSpriteEntity implements Collided {
     */
     public void askForBet() {
         this.app.setActiveScene(this.sceneIndex);
+        this.app.getMoneyText().setMoneyText(this.app.getPlayer().getWallet().getAmount());
     }
 
     /*
