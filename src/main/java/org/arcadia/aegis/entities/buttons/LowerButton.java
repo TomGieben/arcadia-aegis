@@ -15,6 +15,13 @@ public class LowerButton extends TextEntity implements MouseButtonPressedListene
     final private App app;
     final private HigherLower scene;
 
+    /*
+    * Constructor
+    *
+    * @param app The app
+    * @param initialLocation The initial location of the button
+    * @param scene The scene
+    */
     public LowerButton(App app, Coordinate2D initialLocation, HigherLower scene) {
         super(initialLocation, "Lower");
         setFill(Color.DARKBLUE);
@@ -24,6 +31,12 @@ public class LowerButton extends TextEntity implements MouseButtonPressedListene
         this.scene = scene;
     }
 
+    /*
+    * Handle the mouse button pressed event
+    *
+    * @param button The button that was pressed
+    * @param coordinate2D The coordinate of the button press
+    */
     @Override
     public void onMouseButtonPressed(MouseButton button, Coordinate2D coordinate2D){
         if(this.app.getPlayer().getWallet().getAmount() >= scene.getMinigame().getPrice()) {

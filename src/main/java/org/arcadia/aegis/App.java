@@ -38,11 +38,20 @@ public class App extends YaegerGame
     private int height = 600;
     private MoneyText moneyText;
 
-    final private String audioPath = "sounds/background_music.mp3";    public static void main( String[] args )
+    final private String audioPath = "sounds/background_music.mp3";    
+    
+    /**
+     * The entry point of the application
+     * @param args The arguments
+     */
+    public static void main( String[] args )
     {
         launch(args);
     }
 
+    /**
+     * Setup the game
+     */
     @Override
     public void setupGame() {
         setGameTitle("Arcadia Aegis");
@@ -52,6 +61,9 @@ public class App extends YaegerGame
         this.renderPlayer();
     }
 
+    /**
+     * Setup the scenes
+     */
     @Override
     public void setupScenes() {
         addScene(0, new TitleScene(this));
@@ -64,14 +76,25 @@ public class App extends YaegerGame
         this.renderSlotMachines();
     }
 
+    /**
+     * Set the player name
+     * @param name The name
+     */
     public void setPlayerName(String name) {
         this.playerName = name;
     }
 
+    /**
+     * Get the player name
+     * @return The player name
+     */
     public String getPlayerName() {
         return this.playerName;
     }
 
+    /**
+     * Start the game
+     */
     private void renderMinigames() {
         Minigame slotMinigame = new Minigame(
                 this,
@@ -107,6 +130,9 @@ public class App extends YaegerGame
         addScene(7, new WheelOfFate(this, mainPrize));
     }
 
+    /**
+     * Render the bar
+     */
     private void renderBar() {
         String imagePath = "images/bar.png";
         Coordinate2D locationBar = new Coordinate2D(100, 200);
@@ -116,10 +142,16 @@ public class App extends YaegerGame
         addScene(5, new BarScene(this));
     }
 
+    /**
+     * Render the inventory
+     */
     private void renderInventory() {
         addScene(6, new InventoryScene(this));
     }
 
+    /**
+     * Render the player
+     */
     private void renderPlayer() {
         MoneyText moneyText = new MoneyText(new Coordinate2D(1, 5));
         this.moneyText = moneyText;
@@ -129,6 +161,9 @@ public class App extends YaegerGame
         this.player = new Player(locationPlayer, this.getPlayerName());
     }
 
+    /**
+     * Render the slot machines
+     */
     private void renderSlotMachines() {
         Random random = new Random();
         ArrayList<Minigame> minigames = this.getMinigames();
@@ -144,6 +179,11 @@ public class App extends YaegerGame
         }
     }
 
+    /**
+     * Place a random slot machine
+     * @param minigame The minigame
+     * @param random The random
+     */
     private void placeRandomSlotMachine(Minigame minigame, Random random) {
         double x = random.nextInt((int)this.width - this.padding);
         double y = random.nextInt((int)this.height - this.padding);
@@ -167,6 +207,12 @@ public class App extends YaegerGame
         addScene(newSceneIndex, new BetScene(slotMachine));
     }
 
+    /**
+     * Check if the location is close to an existing location
+     * @param x The x
+     * @param y The y
+     * @return True if close to an existing location, false otherwise
+     */
     private boolean isCloseToExistingLocation(double x, double y) {
         for (Coordinate2D coordinate : this.coordinates) {
             if (distance(x, y, coordinate.getX(), coordinate.getY()) < this.padding) {
@@ -176,24 +222,52 @@ public class App extends YaegerGame
         return false;
     }
 
+    /**
+     * Calculate the distance between two points
+     * @param x1 The x1
+     * @param y1 The y1
+     * @param x2 The x2
+     * @param y2 The y2
+     * @return The distance
+     */
     private double distance(double x1, double y1, double x2, double y2) {
         return Math.sqrt(Math.pow(x2 - x1, 2) + Math.pow(y2 - y1, 2));
     }
 
+    /**
+     * Get the player
+     * @return The player
+     */
     public Player getPlayer() {
         return this.player;
     }
 
+    /**
+     * Get the bar
+     * @return The bar
+     */
     public Bar getBar() {
         return this.bar;
     }
 
+    /**
+     * Get the minigames
+     * @return The minigames
+     */
     public ArrayList<Minigame> getMinigames() {
         return this.minigames;
     }
 
+    /**
+     * Get the main prize minigame
+     * @return The main prize minigame
+     */
     public Minigame getMainPrizeMiniGame() { return  this.mainPrizeMiniGame; }
 
+    /**
+     * Get the slot machines
+     * @return The slot machines
+     */
     public ArrayList<SlotMachine> getSlotMachines() { return this.slotmachines; }
 
     public MoneyText getMoneyText() {

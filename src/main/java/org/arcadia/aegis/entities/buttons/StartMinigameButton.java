@@ -13,6 +13,12 @@ import org.arcadia.aegis.objects.SlotMachine;
 public class StartMinigameButton extends TextEntity implements MouseButtonPressedListener {
     final private SlotMachine slotMachine;
 
+    /*
+     * Constructor
+     *
+     * @param slotMachine The slot machine
+     * @param initialLocation The initial location of the button
+     */
     public StartMinigameButton(SlotMachine slotMachine, Coordinate2D initialLocation) {
         super(initialLocation, "Play game");
         setFill(Color.WHITESMOKE);
@@ -21,6 +27,12 @@ public class StartMinigameButton extends TextEntity implements MouseButtonPresse
         this.slotMachine = slotMachine;
     }
 
+    /*
+     * Handle the mouse button pressed event
+     *
+     * @param button The button that was pressed
+     * @param coordinate2D The coordinate of the button press
+     */
     @Override
     public void onMouseButtonPressed(MouseButton button, Coordinate2D coordinate2D){
         slotMachine.getMinigame().start();

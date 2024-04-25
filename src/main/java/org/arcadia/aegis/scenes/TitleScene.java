@@ -23,14 +23,26 @@ public class TitleScene extends DynamicScene implements KeyListener {
     final private App app;
     private TextEntity nameText;
 
+    /*
+     * Constructor
+     *
+     * @param app The app
+     */
     public TitleScene(App app){
         this.app = app;
     }
+
+    /*
+     * Setup the scene
+     */
     @Override
     public void setupScene() {
         setBackgroundImage(this.backgroundPath);
     }
 
+    /*
+     * Setup the entities
+     */
     @Override
     public void setupEntities() {
         this.renderStartButton();
@@ -39,6 +51,9 @@ public class TitleScene extends DynamicScene implements KeyListener {
         this.renderPlayerName();
     }
 
+    /*
+     * Render the start button
+     */
     private void renderStartButton() {
         StartButton startButton = new StartButton(
                 this.app,
@@ -49,6 +64,9 @@ public class TitleScene extends DynamicScene implements KeyListener {
         addEntity(startButton);
     }
 
+    /*
+     * Render the title
+     */
     private void renderTitle() {
         TextEntity title = new TextEntity(
             new Coordinate2D(getWidth() / 2, getHeight() / 3),
@@ -62,6 +80,9 @@ public class TitleScene extends DynamicScene implements KeyListener {
         addEntity(title);
     }
 
+    /*
+     * Render the name input
+     */
     private void renderNameInput() {
         TextEntity input = new TextEntity(
             new Coordinate2D(getWidth() / 2, 500),
@@ -75,6 +96,9 @@ public class TitleScene extends DynamicScene implements KeyListener {
         addEntity(input);
     }
 
+    /*
+     * Render the player name
+     */
     private void renderPlayerName() {
         TextEntity nameText = new TextEntity(
             new Coordinate2D(getWidth() / 2, 550),
@@ -90,6 +114,11 @@ public class TitleScene extends DynamicScene implements KeyListener {
         addEntity(nameText);
     }
 
+    /*
+     * Handle the key presses
+     *
+     * @param set The set of key codes
+     */
     @Override
     public void onPressedKeysChange(Set<KeyCode> set) {
         String currentName = this.app.getPlayerName();

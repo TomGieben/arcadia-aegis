@@ -57,6 +57,11 @@ public class Bar extends DynamicSpriteEntity implements Collided {
         this.initDrinks();
     }
 
+    /*
+    * Initialize the drinks of the bar
+    *
+    * @return void
+    */
     private void initDrinks() {
         List<Drink> drinks = new ArrayList<>();
         drinks.add(new Drink("Cola", 250, InfluenceType.POSITIVE, 2.5f, "images/drinks/cola.png"));

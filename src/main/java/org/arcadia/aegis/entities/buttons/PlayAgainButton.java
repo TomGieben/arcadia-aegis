@@ -11,6 +11,13 @@ import org.arcadia.aegis.App;
 
 public class PlayAgainButton extends TextEntity implements MouseButtonPressedListener {
     final private App app;
+
+    /*
+    * Constructor
+    *
+    * @param app The app
+    * @param initialLocation The initial location of the button
+    */
     public PlayAgainButton(App app, Coordinate2D initialLocation) {
         super(initialLocation,"Play Again");
         setFill(Color.WHITESMOKE);
@@ -19,6 +26,12 @@ public class PlayAgainButton extends TextEntity implements MouseButtonPressedLis
         this.app = app;
     }
 
+    /*
+    * Handle the mouse button pressed event
+    *
+    * @param button The button that was pressed
+    * @param coordinate2D The coordinate of the button press
+    */
     @Override
     public void onMouseButtonPressed(MouseButton button, Coordinate2D coordinate2D) {
         app.setActiveScene(0);

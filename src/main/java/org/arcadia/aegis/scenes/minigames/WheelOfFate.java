@@ -32,18 +32,29 @@ public class WheelOfFate extends DynamicScene {
     private Map<String, String> moneyPrizeMap = new HashMap<>();
     private ArrayList<InventoryItem> itemPrizeMap;
 
-
+    /*
+     * Constructor
+     *
+     * @param app The app
+     * @param minigame The minigame
+     */
     public WheelOfFate(App app, Minigame minigame) {
         this.app = app;
         this.minigame = minigame;
     }
 
+    /*
+     * Setup the scene
+     */
     @Override
     public void setupScene() {
         setBackgroundImage(this.backgroundPath);
         this.createPrizeMapping();
     }
 
+    /*
+     * Setup the entities
+     */
     @Override
     public void setupEntities() {
         this.renderSpinButton();
@@ -55,11 +66,18 @@ public class WheelOfFate extends DynamicScene {
         addEntity(prizeText);
         this.prizeText = prizeText;
     }
+
+    /*
+     * Render the return button
+     */
     private void renderReturnButton() {
         ReturnButton returnButton = new ReturnButton(this.app, new Coordinate2D(getWidth() - 120, getHeight() - 40), 1);
         addEntity(returnButton);
     }
 
+    /*
+     * Spin the wheel
+     */
     public void spin() {
         this.prizeText.setPrizeText("");
         this.playSpinSound();
@@ -81,10 +99,20 @@ public class WheelOfFate extends DynamicScene {
         soundThread.start();
     }
 
+    /*
+     * Get the duration of the spin sound
+     *
+     * @return The duration of the spin sound
+     */
     private double getSpinSoundDuration() {
         return 7.0;
     }
 
+    /*
+     * Award the prize
+     *
+     * @param prize The prize
+     */
     private void awardPrize(Prize prize) {
         this.playSound("sounds/win_sound.wav");
 
@@ -114,6 +142,11 @@ public class WheelOfFate extends DynamicScene {
         }
     }
 
+    /*
+     * Create the prizes
+     *
+     * @return The prizes
+     */
     private ArrayList<Prize> createPrizes() {
         ArrayList<Prize> prizes = new ArrayList<Prize>();
 
@@ -129,6 +162,9 @@ public class WheelOfFate extends DynamicScene {
         return prizes;
     }
 
+    /*
+     * Create the prize mapping
+     */
     private void createPrizeMapping() {
         Map<String, String> moneyPrizeMap = new HashMap<>();
         moneyPrizeMap.put("Cash", "80");
@@ -141,6 +177,12 @@ public class WheelOfFate extends DynamicScene {
         this.moneyPrizeMap = moneyPrizeMap;
         this.itemPrizeMap = items;
     }
+
+    /*
+     * Create a random prize
+     *
+     * @return The random prize
+     */
     private Prize createRandomPrize() {
         Random random = new Random();
         PrizeType[] prizeTypes ={PrizeType.DRINK, PrizeType.MONEY};
@@ -167,6 +209,9 @@ public class WheelOfFate extends DynamicScene {
        return new Prize(randomPrize, randomPrizeName, randomPrizeValue);
     }
 
+    /*
+     * Play the spin sound
+     */
     private void playSpinSound() {
         SoundClip sound = new SoundClip(this.spinSound);
         sound.setVolume(0.5);
@@ -174,6 +219,11 @@ public class WheelOfFate extends DynamicScene {
         sound.play();
     }
 
+    /*
+     * Play a sound
+     *
+     * @param path The path of the sound
+     */
     private void renderSpinButton() {
         TurnWheelButton button = new TurnWheelButton(this, new Coordinate2D(getWidth() / 2, getHeight() - 5));
 
@@ -184,14 +234,29 @@ public class WheelOfFate extends DynamicScene {
         addEntity(button);
     }
 
+    /*
+     * Get the minigame
+     *
+     * @return The minigame
+     */
     public Minigame getMinigame() {
         return this.minigame;
     }
 
+    /*
+     * Get the app
+     *
+     * @return The app
+     */
     public App getApp() {
         return this.app;
     }
 
+    /*
+     * Play a sound
+     *
+     * @param path The path of the sound
+     */
     private void playSound(String path) {
         SoundClip sound = new SoundClip(path);
         sound.setVolume(0.5);

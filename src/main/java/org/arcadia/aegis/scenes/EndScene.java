@@ -19,15 +19,27 @@ public class EndScene extends DynamicScene {
     final private String title = "You won";
     final private App app;
 
+    /*
+     * Constructor
+     *
+     * @param app The app
+     */
     public EndScene(App app){
         this.app = app;
     }
+
+    /*
+     * Setup the scene
+     */
     @Override
     public void setupScene() {
         setBackgroundAudio(this.audioPath);
         setBackgroundImage(this.backgroundPath);
     }
 
+    /*
+     * Setup the entities
+     */
     @Override
     public void setupEntities() {
         this.renderTitle();
@@ -35,6 +47,9 @@ public class EndScene extends DynamicScene {
         this.playRandomSound();
     }
 
+    /*
+     * Render the title
+     */
     private void renderTitle() {
         TextEntity title = new TextEntity(
             new Coordinate2D(getWidth() / 2, getHeight()/ 3),
@@ -48,6 +63,9 @@ public class EndScene extends DynamicScene {
         addEntity(title);
     }
 
+    /*
+     * Render the play again button
+     */
     private void renderPlayAgainButton() {
         PlayAgainButton playAgainButton = new PlayAgainButton(
                 this.app,
@@ -58,6 +76,9 @@ public class EndScene extends DynamicScene {
         addEntity(playAgainButton);
     }
 
+    /*
+     * Play a random sound
+     */
     private void playRandomSound() {
         SoundClip sound = new SoundClip(this.carSoundPath);
         sound.setVolume(1);

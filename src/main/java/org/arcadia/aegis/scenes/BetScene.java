@@ -25,14 +25,26 @@ public class BetScene extends DynamicScene implements KeyListener {
     final private SlotMachine slotMachine;
     private TextEntity betText;
 
+    /*
+     * Constructor
+     *
+     * @param slotMachine The slot machine
+     */
     public BetScene(SlotMachine slotMachine){
         this.slotMachine = slotMachine;
     }
+
+    /*
+     * Setup the scene
+     */
     @Override
     public void setupScene() {
         setBackgroundImage(this.backgroundPath);
     }
 
+    /*
+     * Setup the entities
+     */
     @Override
     public void setupEntities() {
         this.renderStartMinigameButton();
@@ -41,6 +53,9 @@ public class BetScene extends DynamicScene implements KeyListener {
         this.renderBetAmount();
     }
 
+    /*
+     * Render the start minigame button
+     */
     private void renderStartMinigameButton() {
         StartMinigameButton startButton = new StartMinigameButton(
                 this.slotMachine,
@@ -51,6 +66,9 @@ public class BetScene extends DynamicScene implements KeyListener {
         addEntity(startButton);
     }
 
+    /*
+    * Render the title
+    */
     private void renderTitle() {
         TextEntity title = new TextEntity(
             new Coordinate2D(getWidth() / 2, getHeight() / 3),
@@ -64,6 +82,9 @@ public class BetScene extends DynamicScene implements KeyListener {
         addEntity(title);
     }
 
+    /*
+     * Render the bet amount
+     */
     private void renderBetAmount() {
         TextEntity betText = new TextEntity(
                 new Coordinate2D(getWidth() / 2, 550),
@@ -79,6 +100,9 @@ public class BetScene extends DynamicScene implements KeyListener {
         addEntity(betText);
     }
 
+    /*
+     * Render the bet input
+     */
     private void renderBetInput() {
         TextEntity input = new TextEntity(
             new Coordinate2D(getWidth() / 2, 500),
@@ -92,6 +116,11 @@ public class BetScene extends DynamicScene implements KeyListener {
         addEntity(input);
     }
 
+    /*
+     * Handle the key pressed event
+     *
+     * @param set The set of keys that are pressed
+     */
     @Override
     public void onPressedKeysChange(Set<KeyCode> set) {
         String currentBet = this.betText.getText();

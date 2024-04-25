@@ -11,6 +11,13 @@ import org.arcadia.aegis.scenes.minigames.SlotMinigame;
 
 public class SpinButton extends TextEntity implements MouseButtonPressedListener {
     final private SlotMinigame slotMinigame;
+
+    /*
+    * Constructor
+    *
+    * @param slotMinigame The slot minigame
+    * @param initialLocation The initial location of the button
+    */
     public SpinButton(SlotMinigame slotMinigame, Coordinate2D initialLocation) {
         super(initialLocation, "Spin");
         setFill(Color.WHITESMOKE);
@@ -19,6 +26,12 @@ public class SpinButton extends TextEntity implements MouseButtonPressedListener
         this.slotMinigame = slotMinigame;
     }
 
+    /*
+    * Handle the mouse button pressed event
+    *
+    * @param button The button that was pressed
+    * @param coordinate2D The coordinate of the button press
+    */
     @Override
     public void onMouseButtonPressed(MouseButton button, Coordinate2D coordinate2D){
         this.slotMinigame.spin();
