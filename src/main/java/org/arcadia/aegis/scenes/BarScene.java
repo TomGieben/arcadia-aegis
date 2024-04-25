@@ -50,6 +50,8 @@ public class BarScene extends DynamicScene {
         this.renderTitle();
         this.renderReturnButton();
         this.renderDrinks();
+
+        addEntity(this.app.getMoneyText());
     }
 
     /*

@@ -55,6 +55,8 @@ public class BuyButton extends TextEntity implements MouseButtonPressedListener 
         this.playSound();
         player.getInventory().store(this.drink);
         wallet.withdraw(drinkPrice);
+
+        this.app.getMoneyText().setMoneyText(wallet.getAmount());
     }
 
     /*

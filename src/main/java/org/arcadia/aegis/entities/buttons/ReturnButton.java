@@ -39,5 +39,6 @@ public class ReturnButton extends TextEntity implements MouseButtonPressedListen
     public void onMouseButtonPressed(MouseButton button, Coordinate2D coordinate2D){
         this.app.getPlayer().setAnchorLocation(new Coordinate2D(400, 300));
         app.setActiveScene(this.sceneId);
+        this.app.getMoneyText().setMoneyText(this.app.getPlayer().getWallet().getAmount());
     }
 }

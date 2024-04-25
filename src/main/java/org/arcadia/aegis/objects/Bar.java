@@ -82,6 +82,7 @@ public class Bar extends DynamicSpriteEntity implements Collided {
     */
     public void viewBar(){
         this.app.setActiveScene(this.sceneIndex);
+        this.app.getMoneyText().setMoneyText(this.app.getPlayer().getWallet().getAmount());
     }
 
     /*
