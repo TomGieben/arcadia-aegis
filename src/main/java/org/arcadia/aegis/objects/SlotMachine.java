@@ -58,8 +58,9 @@ public class SlotMachine extends DynamicSpriteEntity implements Collided {
     * @param price The price of the slot machine
     * @return float The multiplier of the slot machine
     */
-    public float getMultiplier(float bet, float price) {
-        return bet / price;
+    public float getMultiplier() {
+
+        return this.bet / this.minigame.getPrice();
     }
 
     /*
