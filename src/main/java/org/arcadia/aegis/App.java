@@ -36,7 +36,6 @@ public class App extends YaegerGame
     final private int padding = 100;
     private int width = 800;
     private int height = 600;
-
     final private String audioPath = "sounds/background_music.mp3";    
     
     /**
