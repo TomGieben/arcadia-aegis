@@ -11,6 +11,8 @@ import javafx.scene.text.FontWeight;
 import org.arcadia.aegis.App;
 import org.arcadia.aegis.entities.buttons.PlayAgainButton;
 import org.arcadia.aegis.entities.buttons.StartButton;
+import org.arcadia.aegis.entities.text.PrizeText;
+import org.arcadia.aegis.objects.Player;
 
 public class EndScene extends DynamicScene {
     final private String audioPath = "sounds/background_music.mp3";
@@ -18,6 +20,8 @@ public class EndScene extends DynamicScene {
     final private String carSoundPath = "sounds/car_rev.wav";
     final private String title = "You won";
     final private App app;
+
+    private PrizeText prizeText;
 
     /*
      * Constructor
@@ -45,6 +49,17 @@ public class EndScene extends DynamicScene {
         this.renderTitle();
         this.renderPlayAgainButton();
         this.playRandomSound();
+
+        double textX = 5;
+        int textY = 50;
+        PrizeText prizeText = new PrizeText(new Coordinate2D(textX, textY));
+
+        this.prizeText = prizeText;
+
+        addEntity(prizeText);
+
+        Player player = this.app.getPlayer();
+        prizeText.setPrizeText("Player: " + player.getPlayerName() + " has won with: " + player.getWallet().getAmount());
     }
 
     /*

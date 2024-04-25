@@ -56,7 +56,7 @@ public class WheelOfFate extends DynamicScene {
      */
     @Override
     public void setupEntities() {
-        double textX  = 5;
+        double textX = 5;
         int textY = 50;
         PrizeText prizeText = new PrizeText(new Coordinate2D(textX, textY));
 

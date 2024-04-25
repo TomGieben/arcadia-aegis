@@ -136,10 +136,12 @@ public class HigherLower extends DynamicScene {
             }
         }
 
+        float costAmount = minigame.getPrice() * minigame.getSlotmachine().getMultiplier();
+
         if (won) {
-            this.app.getPlayer().getWallet().deposit(minigame.getPrice());
+            this.app.getPlayer().getWallet().deposit(costAmount);
         } else {
-            this.app.getPlayer().getWallet().withdraw(minigame.getPrice());
+            this.app.getPlayer().getWallet().withdraw(costAmount);
         }
 
         this.app.getMoneyText().setMoneyText(this.app.getPlayer().getWallet().getAmount());

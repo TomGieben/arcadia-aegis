@@ -59,6 +59,9 @@ public class SlotMachine extends DynamicSpriteEntity implements Collided {
     * @return float The multiplier of the slot machine
     */
     public float getMultiplier() {
+        if (this.bet == 0) {
+            return 1;
+        }
 
         return this.bet / this.minigame.getPrice();
     }
@@ -91,6 +94,10 @@ public class SlotMachine extends DynamicSpriteEntity implements Collided {
     public void onCollision(List<Collider> list) {
         this.app.getPlayer().setSpeed(0);
 
-        this.askForBet();
+        if (this.minigame.getName().equals("MainPrize")) {
+            this.minigame.start(this);
+        } else {
+            this.askForBet();
+        }
     }
 }

@@ -41,10 +41,10 @@ public class TurnWheelButton extends TextEntity implements MouseButtonPressedLis
         Wallet wallet = this.wheelOfFate.getApp().getPlayer().getWallet();
         Minigame minigame = this.wheelOfFate.getMinigame();
 
-        if(wallet.getAmount() >= minigame.getPrice()) {
-            wallet.withdraw(minigame.getPrice());
+//        if(wallet.getAmount() >= minigame.getPrice()) {
+//            wallet.withdraw(minigame.getPrice());
             this.wheelOfFate.getApp().getMoneyText().setMoneyText(wallet.getAmount());
             this.wheelOfFate.spin();
-        }
+//        }
     }
 }

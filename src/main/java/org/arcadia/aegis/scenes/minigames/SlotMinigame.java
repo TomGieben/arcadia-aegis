@@ -118,13 +118,14 @@ public class SlotMinigame extends DynamicScene {
         Player player = this.app.getPlayer();
         Wallet playerWallet = player.getWallet();
         MoneyText moneyText = this.app.getMoneyText();
-
+        float costAmount = minigame.getPrice() * minigame.getSlotmachine().getMultiplier();
+        
         if (item1.equals(item2) && item2.equals(item3)) {
-            playerWallet.deposit(minigame.getPrice());
+            playerWallet.deposit(costAmount);
         } else if (item1.equals(item2) || item1.equals(item3) || item2.equals(item3)) {
-            playerWallet.deposit((float) (minigame.getPrice() * 0.5));
+            playerWallet.deposit((float) (costAmount * 0.5));
         } else {
-            playerWallet.withdraw(minigame.getPrice());
+            playerWallet.withdraw(costAmount);
         }
 
         moneyText.setMoneyText(playerWallet.getAmount());
