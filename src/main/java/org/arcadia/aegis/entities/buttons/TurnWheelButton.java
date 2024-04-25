@@ -38,7 +38,7 @@ public class TurnWheelButton extends TextEntity implements MouseButtonPressedLis
     public void onMouseButtonPressed(MouseButton button, Coordinate2D coordinate2D){
         if(this.wheelOfFate.getApp().getPlayer().getWallet().getAmount() >= this.wheelOfFate.getMinigame().getPrice()) {
             this.wheelOfFate.getApp().getPlayer().getWallet().withdraw(this.wheelOfFate.getMinigame().getPrice());
-            this.wheelOfFate.getApp().getPlayer().getMoneyText().setMoneyText(this.wheelOfFate.getApp().getPlayer().getWallet().getAmount());
+            this.wheelOfFate.getApp().getMoneyText().setMoneyText(this.wheelOfFate.getApp().getPlayer().getWallet().getAmount());
             this.wheelOfFate.spin();
         }
     }

@@ -57,7 +57,7 @@ public class HigherLower extends DynamicScene {
 
         currentNumber = generateRandomNumber();
         this.higherLowerText.setHigherLowerText("Current number: " + currentNumber);
-        addEntity(this.app.getPlayer().getMoneyText());
+        addEntity(this.app.getMoneyText());
     }
 
     /*
@@ -136,7 +136,7 @@ public class HigherLower extends DynamicScene {
             this.app.getPlayer().getWallet().withdraw(minigame.getPrice());
         }
 
-        this.app.getPlayer().getMoneyText().setMoneyText(this.app.getPlayer().getWallet().getAmount());
+        this.app.getMoneyText().setMoneyText(this.app.getPlayer().getWallet().getAmount());
         this.currentNumber = this.generateRandomNumber();
         this.higherLowerText.setHigherLowerText("Current number: " + this.currentNumber);
     }
