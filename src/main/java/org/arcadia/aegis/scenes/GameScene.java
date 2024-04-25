@@ -4,6 +4,9 @@ import com.github.hanyaeger.api.Coordinate2D;
 import com.github.hanyaeger.api.scenes.DynamicScene;
 import org.arcadia.aegis.entities.buttons.InventoryButton;
 import org.arcadia.aegis.App;
+import org.arcadia.aegis.entities.text.MoneyText;
+import org.arcadia.aegis.game.Wallet;
+import org.arcadia.aegis.objects.Player;
 
 public class GameScene extends DynamicScene {
     final private App app;
@@ -41,9 +44,12 @@ public class GameScene extends DynamicScene {
      * Render the inventory button
      */
     private void renderInventoryButton() {
+        double buttonX = getWidth() - 140;
+        double buttonY = getHeight() - 40;
+
         InventoryButton inventoryButton = new InventoryButton(
                 this.app,
-                new Coordinate2D(getWidth() - 140, getHeight() - 40),
+                new Coordinate2D(buttonX, buttonY),
                 6
         );
 
@@ -54,9 +60,14 @@ public class GameScene extends DynamicScene {
      * Render the player
      */
     private void renderPlayer() {
-        addEntity(this.app.getPlayer());
-        this.app.getMoneyText().setMoneyText(this.app.getPlayer().getWallet().getAmount());
-        addEntity(this.app.getMoneyText());
+        Player player = this.app.getPlayer();
+        MoneyText moneyText = this.app.getMoneyText();
+        Wallet playerWallet = player.getWallet();
+
+        moneyText.setMoneyText(playerWallet.getAmount());
+
+        addEntity(player);
+        addEntity(moneyText);
     }
 
     /*

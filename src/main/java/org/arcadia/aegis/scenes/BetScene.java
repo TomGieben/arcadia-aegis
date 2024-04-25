@@ -57,9 +57,12 @@ public class BetScene extends DynamicScene implements KeyListener {
      * Render the start minigame button
      */
     private void renderStartMinigameButton() {
+        double buttonX = getWidth() / 2;
+        double buttonY = getHeight() / 3;
+
         StartMinigameButton startButton = new StartMinigameButton(
                 this.slotMachine,
-                new Coordinate2D(getWidth() / 2, getHeight() / 2)
+                new Coordinate2D(buttonX, buttonY)
         );
 
         startButton.setAnchorPoint(AnchorPoint.CENTER_CENTER);
@@ -70,8 +73,11 @@ public class BetScene extends DynamicScene implements KeyListener {
     * Render the title
     */
     private void renderTitle() {
+        double textX = getWidth() / 2;
+        double textY = getHeight() / 3;
+
         TextEntity title = new TextEntity(
-            new Coordinate2D(getWidth() / 2, getHeight() / 3),
+            new Coordinate2D(textX, textY),
             this.title
         );
 
@@ -86,8 +92,11 @@ public class BetScene extends DynamicScene implements KeyListener {
      * Render the bet amount
      */
     private void renderBetAmount() {
+        double textX = getWidth() / 2;
+        double textY = 550;
+
         TextEntity betText = new TextEntity(
-                new Coordinate2D(getWidth() / 2, 550),
+                new Coordinate2D(textX, textY),
                 ""
         );
 
@@ -104,8 +113,11 @@ public class BetScene extends DynamicScene implements KeyListener {
      * Render the bet input
      */
     private void renderBetInput() {
+        double textX = getWidth() / 2;
+        double textY = 500;
+
         TextEntity input = new TextEntity(
-            new Coordinate2D(getWidth() / 2, 500),
+            new Coordinate2D(textX, textY),
             "Amount:"
         );
 
@@ -123,21 +135,24 @@ public class BetScene extends DynamicScene implements KeyListener {
      */
     @Override
     public void onPressedKeysChange(Set<KeyCode> set) {
-        String currentBet = this.betText.getText();
-        StringBuilder currentBetBuilder = new StringBuilder(currentBet);
-
-        if (!this.prevWasEmpty) {
-            this.prevWasEmpty = set.isEmpty();
+        if (betText == null || slotMachine == null) {
+            return;
         }
 
+        StringBuilder currentBetBuilder = new StringBuilder(betText.getText());
         boolean hasDecimal = currentBetBuilder.indexOf(".") != -1;
+        boolean isEmpty = set.isEmpty();
+
+        if (!prevWasEmpty) {
+            prevWasEmpty = isEmpty;
+        }
 
         for (KeyCode keyCode : set) {
             String keyName = keyCode.getName();
 
             if (keyCode != KeyCode.BACK_SPACE) {
-                if (this.prevWasEmpty) {
-                    Character key = keyName.charAt(0);
+                if (prevWasEmpty) {
+                    char key = keyName.charAt(0);
 
                     if (key == 'P') {
                         if (hasDecimal) {
@@ -145,13 +160,13 @@ public class BetScene extends DynamicScene implements KeyListener {
                         }
 
                         hasDecimal = true;
-                        key = (".").charAt(0);
+                        key = '.';
                     }
 
                     currentBetBuilder.append(key);
-                    this.prevWasEmpty = false;
+                    prevWasEmpty = false;
                 }
-            }  else {
+            } else {
                 if (currentBetBuilder.length() > 0) {
                     currentBetBuilder.deleteCharAt(currentBetBuilder.length() - 1);
                 }
@@ -160,10 +175,15 @@ public class BetScene extends DynamicScene implements KeyListener {
 
         String bet = currentBetBuilder.toString();
 
-        if(!bet.isEmpty()) {
-            this.slotMachine.setBet(Float.parseFloat(bet));
+        if (!bet.isEmpty()) {
+            try {
+                float betValue = Float.parseFloat(bet);
+                slotMachine.setBet(betValue);
+            } catch (NumberFormatException e) {
+                return;
+            }
         }
 
-        this.betText.setText(bet);
+        betText.setText(bet);
     }
 }

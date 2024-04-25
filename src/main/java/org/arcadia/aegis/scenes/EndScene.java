@@ -51,8 +51,11 @@ public class EndScene extends DynamicScene {
      * Render the title
      */
     private void renderTitle() {
+        double textX = getWidth() / 2;
+        double textY = getHeight() / 3;
+
         TextEntity title = new TextEntity(
-            new Coordinate2D(getWidth() / 2, getHeight()/ 3),
+            new Coordinate2D(textX, textY),
             this.title
         );
 
@@ -67,9 +70,12 @@ public class EndScene extends DynamicScene {
      * Render the play again button
      */
     private void renderPlayAgainButton() {
+        double buttonX = getWidth() / 2;
+        double buttonY = getHeight() / 2;
+
         PlayAgainButton playAgainButton = new PlayAgainButton(
                 this.app,
-                new Coordinate2D(getWidth() / 2, getHeight() / 2)
+                new Coordinate2D(buttonX, buttonY)
         );
 
         playAgainButton.setAnchorPoint(AnchorPoint.CENTER_CENTER);

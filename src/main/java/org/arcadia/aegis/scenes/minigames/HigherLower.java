@@ -81,7 +81,13 @@ public class HigherLower extends DynamicScene {
      * Render the return button
      */
     private void renderReturnButton() {
-        ReturnButton returnButton = new ReturnButton(this.app, new Coordinate2D(getWidth() - 120, getHeight() - 40), 1);
+        int buttonWidth = 120;
+        int buttonHeight = 40;
+        double buttonX = getWidth() - buttonWidth;
+        double buttonY = getHeight() - buttonHeight;
+
+        ReturnButton returnButton = new ReturnButton(this.app,  new Coordinate2D(buttonX, buttonY), 1);
+
         addEntity(returnButton);
     }
 
@@ -118,8 +124,8 @@ public class HigherLower extends DynamicScene {
      */
     public void runGame(boolean higher) {
         int randomNumber = generateRandomNumber();
-
         boolean won = false;
+
         if (higher) {
             if (randomNumber > currentNumber) {
                 won = true;

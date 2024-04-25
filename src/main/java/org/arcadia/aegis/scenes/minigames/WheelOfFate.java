@@ -10,13 +10,12 @@ import javafx.scene.text.FontWeight;
 import org.arcadia.aegis.App;
 import org.arcadia.aegis.entities.buttons.ReturnButton;
 import org.arcadia.aegis.entities.buttons.TurnWheelButton;
+import org.arcadia.aegis.entities.text.MoneyText;
 import org.arcadia.aegis.entities.text.PrizeText;
 import org.arcadia.aegis.enums.PrizeType;
-import org.arcadia.aegis.game.Drink;
-import org.arcadia.aegis.game.MainPrize;
-import org.arcadia.aegis.game.Minigame;
-import org.arcadia.aegis.game.Prize;
+import org.arcadia.aegis.game.*;
 import org.arcadia.aegis.inventory.InventoryItem;
+import org.arcadia.aegis.objects.Player;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -57,21 +56,30 @@ public class WheelOfFate extends DynamicScene {
      */
     @Override
     public void setupEntities() {
-        this.renderSpinButton();
-        this.renderReturnButton();
+        double textX  = 5;
+        int textY = 50;
+        PrizeText prizeText = new PrizeText(new Coordinate2D(textX, textY));
+
+        this.prizeText = prizeText;
 
         addEntity(this.app.getMoneyText());
-
-        PrizeText prizeText = new PrizeText(new Coordinate2D(5, 50));
         addEntity(prizeText);
-        this.prizeText = prizeText;
+
+        this.renderSpinButton();
+        this.renderReturnButton();
     }
 
     /*
      * Render the return button
      */
     private void renderReturnButton() {
-        ReturnButton returnButton = new ReturnButton(this.app, new Coordinate2D(getWidth() - 120, getHeight() - 40), 1);
+        int buttonWidth = 120;
+        int buttonHeight = 40;
+        double buttonX = getWidth() - buttonWidth;
+        double buttonY = getHeight() - buttonHeight;
+
+        ReturnButton returnButton = new ReturnButton(this.app,  new Coordinate2D(buttonX, buttonY), 1);
+
         addEntity(returnButton);
     }
 
@@ -82,11 +90,10 @@ public class WheelOfFate extends DynamicScene {
         this.prizeText.setPrizeText("");
         this.playSpinSound();
         ArrayList<Prize> prizes = this.createPrizes();
-
         Random random = new Random();
         int randomIndex = random.nextInt(prizes.size());
-
         Prize winningPrize = prizes.get(randomIndex);
+
         Thread soundThread = new Thread(() -> {
             try {
                 Thread.sleep((long) (getSpinSoundDuration() * 1000));
@@ -96,6 +103,7 @@ public class WheelOfFate extends DynamicScene {
                 e.printStackTrace();
             }
         });
+
         soundThread.start();
     }
 
@@ -117,18 +125,27 @@ public class WheelOfFate extends DynamicScene {
         this.playSound("sounds/win_sound.wav");
 
         if (PrizeType.MONEY == prize.getType()) {
-            this.app.getPlayer().getWallet().deposit(Integer.parseInt(prize.getValue()));
-            this.app.getMoneyText().setMoneyText(this.app.getPlayer().getWallet().getAmount());
-            this.prizeText.setPrizeText("You have gained: " + prize.getValue() + " Bucks");
+            Player player = this.app.getPlayer();
+            Wallet playerWallet = player.getWallet();
+            MoneyText moneyText = this.app.getMoneyText();
+
+            int prizeValue = Integer.parseInt(prize.getValue());
+            playerWallet.deposit(prizeValue);
+            moneyText.setMoneyText(playerWallet.getAmount());
+            this.prizeText.setPrizeText("Congratulations! You have gained: " + prizeValue + " Bucks");
+
         } else if (PrizeType.DRINK == prize.getType() || PrizeType.MAINPRIZE == prize.getType()) {
             InventoryItem inventoryItem = prize;
 
             if (PrizeType.DRINK == prize.getType()) {
                 String prizeName = prize.getName();
+
                 for (InventoryItem item : this.itemPrizeMap) {
                     if (item instanceof Drink && ((Drink) item).getName().equals(prizeName)) {
                         inventoryItem = item;
+
                         this.prizeText.setPrizeText("You have won drink: " + ((Drink) inventoryItem).getName());
+
                         break;
                     }
                 }
@@ -149,11 +166,11 @@ public class WheelOfFate extends DynamicScene {
      */
     private ArrayList<Prize> createPrizes() {
         ArrayList<Prize> prizes = new ArrayList<Prize>();
-
         MainPrize mainPrize = new MainPrize("images/prizes/car_prize.png");
+        int maxWheelPrizes = 10;
+
         prizes.add(mainPrize);
 
-        int maxWheelPrizes = 10;
         for (int i = 0; i < maxWheelPrizes; i++) {
             Prize prize = this.createRandomPrize();
             prizes.add(prize);

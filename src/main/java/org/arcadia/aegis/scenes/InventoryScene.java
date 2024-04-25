@@ -80,21 +80,21 @@ public class InventoryScene extends DynamicScene {
     private void renderUseButton(InventoryItem item, int counter) {
         int padding = 60;
         double baseX = padding + (counter * 100);
-        double baseY = padding;
+        double baseY = padding + 30;
         InventoryItemEntity inventoryItemEntity = null;
 
         if (item instanceof Drink) {
             Drink drink = (Drink) item;
             inventoryItemEntity = new InventoryItemEntity(
                     baseX,
-                    baseY + 30,
+                    baseY,
                     drink.getImagePath()
             );
         } else if (item instanceof MainPrize) {
             MainPrize mainPrize = (MainPrize) item;
             inventoryItemEntity = new InventoryItemEntity(
                     baseX,
-                    baseY + 30,
+                    baseY,
                     mainPrize.getImagePath()
             );
         }
@@ -113,8 +113,11 @@ public class InventoryScene extends DynamicScene {
      * Render the title
      */
     private void renderTitle() {
+        double textX  = getWidth() / 2;
+        double textY = 5;
+
         TextEntity title = new TextEntity(
-            new Coordinate2D(getWidth() / 2, 5),
+            new Coordinate2D(textX, textY),
             this.title
         );
 
@@ -129,7 +132,16 @@ public class InventoryScene extends DynamicScene {
      * Render the return button
      */
     private void renderReturnButton() {
-        ReturnButton returnButton = new ReturnButton(this.app, new Coordinate2D(getWidth() - 120, getHeight() - 40), 1);
+        double buttonX = getWidth() - 120;
+        double buttonY = getHeight() - 40;
+        int sceneId = 1;
+
+        ReturnButton returnButton = new ReturnButton(
+                this.app,
+                new Coordinate2D(buttonX, buttonY),
+                sceneId
+
+        );
         addEntity(returnButton);
     }
 }

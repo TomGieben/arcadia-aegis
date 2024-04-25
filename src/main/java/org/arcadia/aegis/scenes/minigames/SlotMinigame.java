@@ -14,8 +14,11 @@ import org.arcadia.aegis.App;
 import org.arcadia.aegis.entities.buttons.PlayAgainButton;
 import org.arcadia.aegis.entities.buttons.ReturnButton;
 import org.arcadia.aegis.entities.buttons.SpinButton;
+import org.arcadia.aegis.entities.text.MoneyText;
 import org.arcadia.aegis.game.Minigame;
+import org.arcadia.aegis.game.Wallet;
 import org.arcadia.aegis.objects.Fruit;
+import org.arcadia.aegis.objects.Player;
 
 import java.util.ArrayList;
 import java.util.Random;
@@ -63,8 +66,11 @@ public class SlotMinigame extends DynamicScene {
      * Render the title
      */
     private void renderTitle() {
+        double textX = getWidth() / 2;
+        double textY = 5;
+
         TextEntity title = new TextEntity(
-                new Coordinate2D(getWidth() / 2, 5),
+                new Coordinate2D(textX, textY),
                 this.minigame.getName()
         );
 
@@ -79,7 +85,9 @@ public class SlotMinigame extends DynamicScene {
      * Render the spin button
      */
     private void renderSpinButton() {
-        SpinButton button = new SpinButton(this, new Coordinate2D(getWidth() / 2, getHeight() - 5));
+        double buttonX = getWidth() / 2;
+        double buttonY = getHeight() - 5;
+        SpinButton button = new SpinButton(this, new Coordinate2D(buttonX, buttonY));
 
         button.setAnchorPoint(AnchorPoint.BOTTOM_CENTER);
         button.setFill(Color.WHITESMOKE);
@@ -107,15 +115,19 @@ public class SlotMinigame extends DynamicScene {
 
         this.renderItems(randomIndex1, randomIndex2, randomIndex3);
 
+        Player player = this.app.getPlayer();
+        Wallet playerWallet = player.getWallet();
+        MoneyText moneyText = this.app.getMoneyText();
+
         if (item1.equals(item2) && item2.equals(item3)) {
-            this.app.getPlayer().getWallet().deposit(minigame.getPrice());
+            playerWallet.deposit(minigame.getPrice());
         } else if (item1.equals(item2) || item1.equals(item3) || item2.equals(item3)) {
-            this.app.getPlayer().getWallet().deposit((float)(minigame.getPrice() * 0.5));
+            playerWallet.deposit((float) (minigame.getPrice() * 0.5));
         } else {
-            this.app.getPlayer().getWallet().withdraw(minigame.getPrice());
+            playerWallet.withdraw(minigame.getPrice());
         }
 
-        this.app.getMoneyText().setMoneyText(this.app.getPlayer().getWallet().getAmount());
+        moneyText.setMoneyText(playerWallet.getAmount());
     }
 
     /*
@@ -169,7 +181,13 @@ public class SlotMinigame extends DynamicScene {
      * Render the return button
      */
     private void renderReturnButton() {
-        ReturnButton returnButton = new ReturnButton(this.app, new Coordinate2D(getWidth() - 120, getHeight() - 40), 1);
+        int buttonWidth = 120;
+        int buttonHeight = 40;
+        double buttonX = getWidth() - buttonWidth;
+        double buttonY = getHeight() - buttonHeight;
+
+        ReturnButton returnButton = new ReturnButton(this.app,  new Coordinate2D(buttonX, buttonY), 1);
+
         addEntity(returnButton);
     }
 }

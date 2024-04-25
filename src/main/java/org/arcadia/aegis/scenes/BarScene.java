@@ -49,7 +49,6 @@ public class BarScene extends DynamicScene {
     public void setupEntities() {
         this.renderTitle();
         this.renderReturnButton();
-
         this.renderDrinks();
     }
 
@@ -106,8 +105,11 @@ public class BarScene extends DynamicScene {
      * Render the title
      */
     private void renderTitle() {
+        double textX = getWidth() / 2;
+        double textY = 5;
+
         TextEntity title = new TextEntity(
-            new Coordinate2D(getWidth() / 2, 5),
+            new Coordinate2D(textX, textY),
             this.title
         );
 
@@ -122,7 +124,14 @@ public class BarScene extends DynamicScene {
     * Render the return button
     */
     private void renderReturnButton() {
-        ReturnButton returnButton = new ReturnButton(this.app, new Coordinate2D(getWidth() - 120, getHeight() - 40), 1);
+        int buttonWidth = 120;
+        int buttonHeight = 40;
+        double buttonX = getWidth() - buttonWidth;
+        double buttonY = getHeight() - buttonHeight;
+
+        Coordinate2D buttonPosition = new Coordinate2D(buttonX, buttonY);
+        ReturnButton returnButton = new ReturnButton(app, buttonPosition, 1);
+
         addEntity(returnButton);
     }
 }

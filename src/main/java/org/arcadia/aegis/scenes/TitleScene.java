@@ -18,7 +18,6 @@ import java.util.Set;
 
 public class TitleScene extends DynamicScene implements KeyListener {
     final private String backgroundPath = "backgrounds/titlescreen.jpg";
-
     private boolean prevWasEmpty = true;
     final private App app;
     private TextEntity nameText;
@@ -55,9 +54,12 @@ public class TitleScene extends DynamicScene implements KeyListener {
      * Render the start button
      */
     private void renderStartButton() {
+        double buttonY = getHeight() / 2;
+        double buttonX = getWidth() / 2;
+
         StartButton startButton = new StartButton(
                 this.app,
-                new Coordinate2D(getWidth() / 2, getHeight() / 2)
+                new Coordinate2D(buttonX, buttonY)
         );
 
         startButton.setAnchorPoint(AnchorPoint.CENTER_CENTER);
@@ -68,8 +70,11 @@ public class TitleScene extends DynamicScene implements KeyListener {
      * Render the title
      */
     private void renderTitle() {
+        double textY = getHeight() / 3;
+        double textX = getWidth() / 2;
+
         TextEntity title = new TextEntity(
-            new Coordinate2D(getWidth() / 2, getHeight() / 3),
+            new Coordinate2D(textX, textY),
             getStage().getTitle()
         );
 
@@ -84,8 +89,11 @@ public class TitleScene extends DynamicScene implements KeyListener {
      * Render the name input
      */
     private void renderNameInput() {
+        double textY = 500;
+        double textX = getWidth() / 2;
+
         TextEntity input = new TextEntity(
-            new Coordinate2D(getWidth() / 2, 500),
+            new Coordinate2D(textX, textY),
             "Voer je naam in:"
         );
 
@@ -100,8 +108,11 @@ public class TitleScene extends DynamicScene implements KeyListener {
      * Render the player name
      */
     private void renderPlayerName() {
+        double textY = 550;
+        double textX = getWidth() / 2;
+
         TextEntity nameText = new TextEntity(
-            new Coordinate2D(getWidth() / 2, 550),
+            new Coordinate2D(textX, textY),
             ""
         );
 
