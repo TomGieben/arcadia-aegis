@@ -26,7 +26,7 @@ import java.util.stream.Stream;
 
 public class HigherLower extends DynamicScene {
 
-    final private String wonSound = "sounds/win_sound.wav";
+    final private String wonSound = "sounds/success_sound.wav";
     final private String lostSound = "sounds/lost_sound.wav";
     final private App app;
     final private Minigame minigame;
