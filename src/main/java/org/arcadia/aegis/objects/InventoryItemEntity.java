@@ -3,8 +3,9 @@ package org.arcadia.aegis.objects;
 import com.github.hanyaeger.api.Coordinate2D;
 import com.github.hanyaeger.api.Size;
 import com.github.hanyaeger.api.entities.impl.DynamicSpriteEntity;
+import org.arcadia.aegis.entities.buttons.PlayAgainButton;
 
-public class InventoryItemEntity extends DynamicSpriteEntity {
+public abstract class InventoryItemEntity extends PlayAgainButton {
 
     /*
      * Constructor
