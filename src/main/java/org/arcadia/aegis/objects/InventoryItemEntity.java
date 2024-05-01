@@ -5,7 +5,7 @@ import com.github.hanyaeger.api.Size;
 import com.github.hanyaeger.api.entities.impl.DynamicSpriteEntity;
 import org.arcadia.aegis.entities.buttons.PlayAgainButton;
 
-public abstract class InventoryItemEntity extends PlayAgainButton {
+public abstract class InventoryItemEntity extends DynamicSpriteEntity {
 
     /*
      * Constructor
@@ -15,7 +15,6 @@ public abstract class InventoryItemEntity extends PlayAgainButton {
      * @param imagePath The image path of the fruit
      */
     public InventoryItemEntity(double x, double y, String imagePath) {
-        //Width and height of the inventoryItem = 100
         super(imagePath, new Coordinate2D(x, y), new Size(100, 100));
     }
 }
